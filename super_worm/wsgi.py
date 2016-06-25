@@ -14,4 +14,4 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "super_worm.settings")
 
 application = get_wsgi_application()
-# gunicorn super_worm.wsgi:application -w 4 -b 127.0.0.1:8000 -k gevent --max-requests 500
+# gunicorn super_worm:application -w 4 --bind 127.0.0.1:8000 -k gevent --max-requests 500
