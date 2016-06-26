@@ -22,3 +22,15 @@ git clone 'your project website'
 pip install django==1.9.7
 pip install gevent==1.1.1
 pip install gunicorn==19.6.0
+
+5.
+
+echo_supervisord_conf > /etc/supervisord.conf #create a supervisord config
+
+
+6.
+supervisorctl method [add clear fg open quit remove restart start stop update]
+I use this start myproject supervisord -c /home/django-scrapy/supervisord.conf
+
+
+
