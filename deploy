@@ -1,0 +1,24 @@
+
+1.
+apt-get install git
+apt-get install libmysqld-dev
+apt-get install libmysqlclient-dev
+apt-get install python-dev
+apt-get install nginx
+apt-get install supervisor
+
+2.
+pip install virtualenv
+pip install virtualenvwrapper
+
+3.
+mkvirtualenv 'your virtualenv directory'
+workon 'your virtualenv directory'
+
+cd into you project directory
+git clone 'your project website'
+
+4.
+pip install django==1.9.7
+pip install gevent==1.1.1
+pip install gunicorn==19.6.0
