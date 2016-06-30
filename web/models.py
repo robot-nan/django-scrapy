@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-Glod_SHOW_TIME_CHOICE = (
+GlOD_SHOW_TIME_CHOICE = (
 
     (u'0', u'1分钟'),
     (u'1', u'5分钟'),
@@ -31,11 +31,11 @@ class GoldAdvice(BaseTime):
     technology_advice = models.CharField(u'技术指标建议', max_length=32, null=True, blank=True, unique=True)
     technology_buy = models.CharField(u'技术指标购买', max_length=32, null=True, blank=True, unique=True)
     technology_sell = models.CharField(u'技术指标出售', max_length=32, null=True, blank=True, unique=True)
-    show_data = models.CharField(u'更新区间', max_length=2, choices=Glod_SHOW_TIME_CHOICE, default=u'0')
+    show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
 
 class GoldPivotPoint(BaseTime):
     """枢轴点"""
-    name = models.ForeignKey(GoldName, related_name='pivot_point')
+    name = models.ForeignKey('GoldName', related_name='pivot_point')
     support1 = models.CharField(u'支撑位1', max_length=32, null=True, blank=True, unique=True)
     support2 = models.CharField(u'支撑位2', max_length=32, null=True, blank=True, unique=True)
     support3 = models.CharField(u'支撑位3', max_length=32, null=True, blank=True, unique=True)
@@ -43,7 +43,7 @@ class GoldPivotPoint(BaseTime):
     drag1 = models.CharField(u'阻力位1', max_length=32, null=True, blank=True, unique=True)
     drag2 = models.CharField(u'阻力位2', max_length=32, null=True, blank=True, unique=True)
     drag3 = models.CharField(u'阻力位3', max_length=32, null=True, blank=True, unique=True)
-    show_data = models.CharField(u'更新区间', max_length=2, choices=Glod_SHOW_TIME_CHOICE, default=u'0')
+    show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
 
 
 class GoldName(models.Model):
@@ -52,11 +52,11 @@ class GoldName(models.Model):
 
 class GoldTechniqueData(BaseTime):
     """技术指标"""
-    symbol = models.ForeignKey(GoldName, related_name='pivot_point')
+    symbol = models.ForeignKey('GoldName', related_name='pivot_point')
     get_time = models.CharField(u'官方更新时间', max_length=32, null=True, blank=True, unique=True)
     price = models.CharField(u'价值', max_length=32, null=True, blank=True, unique=True)
     oprate = models.CharField(u'操作', max_length=32, null=True, blank=True, unique=True)
-    show_data = models.CharField(u'更新区间', max_length=2, choices=SHOW_TIME_CHOICE, default=u'0')
+    show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
 
 
 class GoldSymbolName(models.Model):
@@ -66,10 +66,10 @@ class GoldSymbolName(models.Model):
 class GoldMoveAverage(BaseTime):
     """移动平均指数"""
     get_time = models.CharField(u'官方更新时间', max_length=32, null=True, blank=True, unique=True)
-    date_name =  models.ForeignKey(GoldMoveDateName, related_name='pivot_point')
+    date_name =  models.ForeignKey('GoldMoveDateName', related_name='pivot_point')
     standard = models.CharField(u'标准', max_length=32, null=True, blank=True, unique=True)
     move = models.CharField(u'移动', max_length=32, null=True, blank=True, unique=True)
-    show_data = models.CharField(u'更新区间', max_length=2, choices=SHOW_TIME_CHOICE, default=u'0')
+    show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
 
 
 class GoldMoveDateName(models.Model):
