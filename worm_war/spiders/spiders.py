@@ -34,7 +34,6 @@ class GoldGlodInfoSpider(Spider):
             technology_3 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[3]/td[4]/text()')
             for _index in range(8):
                 item['composite_advice'] = advice[_index].extract().strip()
-                print item['composite_advice']
                 item['average_advice'] = move_1[_index].extract().strip()
                 item['average_buy'] = move_2[_index].extract().strip()
                 item['average_sell'] = move_3[_index].extract().strip()
