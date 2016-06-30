@@ -18,8 +18,8 @@ GlOD_SHOW_TIME_CHOICE = (
 
 class BaseTime(models.Model):
     """基本模型，带创建更新时间"""
-    created = models.DateTimeField(u'创建时间', default=None, auto_now_add=True)
-    updated = models.DateTimeField(u'修改时间', default=None, auto_now=True)
+    created = models.DateTimeField(u'创建时间', auto_now_add=True)
+    updated = models.DateTimeField(u'修改时间', auto_now=True)
 
     objects = models.Manager()
 
