@@ -1,8 +1,7 @@
-#coding:utf-8
+# coding:utf-8
 from __future__ import unicode_literals
 
 from django.db import models
-
 
 GlOD_SHOW_TIME_CHOICE = (
 
@@ -16,13 +15,13 @@ GlOD_SHOW_TIME_CHOICE = (
     (u'7', u'每月'),
 )
 
+
 class BaseTime(models.Model):
     """基本模型，带创建更新时间"""
-    created = models.DateTimeField(u'创建时间', auto_now_add=True)
-    updated = models.DateTimeField(u'修改时间', auto_now=True)
+    created = models.DateTimeField(u'创建时间', default=None, auto_now_add=True)
+    updated = models.DateTimeField(u'修改时间', default=None, auto_now=True)
 
     objects = models.Manager()
-
 
     class Meta:
         abstract = True
@@ -39,6 +38,7 @@ class GoldAdvice(BaseTime):
     technology_buy = models.CharField(u'技术指标购买', max_length=32, null=True, blank=True, unique=True)
     technology_sell = models.CharField(u'技术指标出售', max_length=32, null=True, blank=True, unique=True)
     show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
+
 
 class GoldPivotPoint(BaseTime):
     """枢轴点"""
@@ -57,6 +57,7 @@ class GoldName(models.Model):
     """枢轴点 名称"""
     name = models.CharField(u'名称', max_length=32, null=True, blank=True, unique=True)
 
+
 class GoldTechniqueData(BaseTime):
     """技术指标"""
     symbol = models.ForeignKey('GoldName', related_name='gold_technique_data')
@@ -70,10 +71,11 @@ class GoldSymbolName(models.Model):
     """技术指标 符号名 名字会变 如果没有要的名字就要重新写入进去"""
     name = models.CharField(u'符号名称', max_length=32, null=True, blank=True, unique=True)
 
+
 class GoldMoveAverage(BaseTime):
     """移动平均指数"""
     get_time = models.CharField(u'官方更新时间', max_length=32, null=True, blank=True, unique=True)
-    date_name =  models.ForeignKey('GoldMoveDateName', related_name='gold_move_average')
+    date_name = models.ForeignKey('GoldMoveDateName', related_name='gold_move_average')
     standard = models.CharField(u'标准', max_length=32, null=True, blank=True, unique=True)
     move = models.CharField(u'移动', max_length=32, null=True, blank=True, unique=True)
     show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
@@ -82,5 +84,3 @@ class GoldMoveAverage(BaseTime):
 class GoldMoveDateName(models.Model):
     """移动平均指数 日期名字"""
     name = models.CharField(u'符号名称', max_length=32, null=True, blank=True, unique=True)
-
-
