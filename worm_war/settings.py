@@ -11,7 +11,7 @@
 import sys
 sys.path.insert(0, '/Users/robot/django-scrapy')
 import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'ddw.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'super_worm.settings'
 
 BOT_NAME = 'worm_war'
 
