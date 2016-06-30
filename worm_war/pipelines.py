@@ -18,7 +18,9 @@ class TudouUserPipeline(object):
             tmp_item = dict(item)
             item_model.objects.create(**tmp_item)
         except Exception, e:
+            print '1####################'
             print e
+        print '1####################'
         return item
 def item_to_model(item):
     """scrapy item  to django model"""
