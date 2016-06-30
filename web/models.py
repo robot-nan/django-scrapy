@@ -20,7 +20,14 @@ class BaseTime(models.Model):
     """基本模型，带创建更新时间"""
     created = models.DateTimeField(u'创建时间', auto_now_add=True)
     updated = models.DateTimeField(u'修改时间', auto_now=True)
-    # is_delete = models.CharField(u'是否删除', max_length=2, choices=YES_NO_CHOICES, default=u'0')
+
+    objects = models.Manager()
+
+
+    class Meta:
+        abstract = True
+        ordering = ['-id', ]
+
 
 class GoldAdvice(BaseTime):
     """综合建议"""
