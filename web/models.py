@@ -35,7 +35,7 @@ class GoldAdvice(BaseTime):
 
 class GoldPivotPoint(BaseTime):
     """枢轴点"""
-    name = models.ForeignKey('GoldName', related_name='pivot_point')
+    name = models.ForeignKey('GoldName', related_name='gold_pivot_point')
     support1 = models.CharField(u'支撑位1', max_length=32, null=True, blank=True, unique=True)
     support2 = models.CharField(u'支撑位2', max_length=32, null=True, blank=True, unique=True)
     support3 = models.CharField(u'支撑位3', max_length=32, null=True, blank=True, unique=True)
@@ -52,7 +52,7 @@ class GoldName(models.Model):
 
 class GoldTechniqueData(BaseTime):
     """技术指标"""
-    symbol = models.ForeignKey('GoldName', related_name='pivot_point')
+    symbol = models.ForeignKey('GoldName', related_name='gold_technique_data')
     get_time = models.CharField(u'官方更新时间', max_length=32, null=True, blank=True, unique=True)
     price = models.CharField(u'价值', max_length=32, null=True, blank=True, unique=True)
     oprate = models.CharField(u'操作', max_length=32, null=True, blank=True, unique=True)
@@ -66,7 +66,7 @@ class GoldSymbolName(models.Model):
 class GoldMoveAverage(BaseTime):
     """移动平均指数"""
     get_time = models.CharField(u'官方更新时间', max_length=32, null=True, blank=True, unique=True)
-    date_name =  models.ForeignKey('GoldMoveDateName', related_name='pivot_point')
+    date_name =  models.ForeignKey('GoldMoveDateName', related_name='gold_move_average')
     standard = models.CharField(u'标准', max_length=32, null=True, blank=True, unique=True)
     move = models.CharField(u'移动', max_length=32, null=True, blank=True, unique=True)
     show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
