@@ -8,7 +8,7 @@ from django.forms import model_to_dict
 # from hw.models import *
 
 #
-class TudouUserPipeline(object):
+class Pipelines(object):
     def process_item(self, item, spider):
         try:
             item_model = item_to_model(item)
@@ -18,10 +18,10 @@ class TudouUserPipeline(object):
             tmp_item = dict(item)
             item_model.objects.create(**tmp_item)
         except Exception, e:
-            print '1####################'
             print e
-        print '1####################'
         return item
+
+
 def item_to_model(item):
     """scrapy item  to django model"""
     model_class = getattr(item, 'django_model')

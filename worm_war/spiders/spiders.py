@@ -42,7 +42,6 @@ class GoldGlodInfoSpider(Spider):
                 item['technology_sell'] = technology_3[_index].extract().strip()
                 item['show_data'] = _index
                 item['show_team'] = now_time
-
                 yield item
             # for a,x,c,s,d,we,r in zip(advice,move_1,move_2,move_3,technology_1,technology_2,technology_3):
 

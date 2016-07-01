@@ -19,7 +19,7 @@ SPIDER_MODULES = ['spiders']
 NEWSPIDER_MODULE = 'spiders'
 
 ITEM_PIPELINES = {
-    'pipelines.TudouUserPipeline': 1000,
+    'pipelines.Pipelines': 1000,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
