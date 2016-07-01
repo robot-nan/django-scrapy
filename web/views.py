@@ -1,5 +1,4 @@
 
-from django.forms.models import model_to_dict
 from django.core import serializers
 from web.models import GoldAdvice
 from django.http import JsonResponse, HttpResponse
