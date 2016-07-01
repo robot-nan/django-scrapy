@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-
+import codecs
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+codecs.register(lambda name: codecs.lookup('utf8') if name == 'utf8mb4' else None)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -90,6 +91,7 @@ WSGI_APPLICATION = 'super_worm.wsgi.application'
 #         # 'OPTIONS': {'charset': 'utf8mb4'}
 #     }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
