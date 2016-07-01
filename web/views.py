@@ -40,14 +40,14 @@ def gold_advice(request):
 def get_kxt(request, date=None):
     res = requests.get('http://www.kxt.com/cjrl/ajax?date={date}'.format(date=date))
     res = json.loads(res.content)
-    soup = BeautifulSoup(res['data']['pc']['cjDataHtml'],'html.parser')
-    soup = soup.find_all(attrs={'class':'rlDateItem'})
+    soup = BeautifulSoup(res['data']['pc']['cjDataHtml'], 'html.parser')
+    soup = soup.find_all(attrs={'class': 'rlDateItem'})
     item = []
     for _row in soup:
         tmp = {}
         line = _row.find_all('td')
         tmp['time'] = line[0].text
-        tmp['region'] = [line[1].find('img').get('alt'),line[1].find('img').get('src')]
+        tmp['region'] = {'name': line[1].find('img').get('alt'), 'src': line[1].find('img').get('src')}
         tmp['title'] = line[2].text
         tmp['important'] = line[3].text
         tmp['previous_value'] = line[4].text
@@ -56,5 +56,3 @@ def get_kxt(request, date=None):
         tmp['judge'] = line[7].text
         item.append(tmp)
     return JsonResponse({'data': item, 'now_time': timezone.now()})
-
-
