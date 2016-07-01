@@ -56,3 +56,25 @@ def get_kxt(request, date=None):
         tmp['judge'] = line[7].text
         item.append(tmp)
     return JsonResponse({'data': item, 'now_time': timezone.now()})
+
+
+def get_yuncaijing(request):
+    item = []
+
+    res = requests.get('http://www.yuncaijing.com/neican')
+    body = BeautifulSoup(res.content, 'html.parser')
+    soup = body.find(attrs={'class': 'neican-list'})
+    for _row in soup.find_all('li'):
+        tmp ={}
+        try:
+            tmp['time'] = _row.find('time').text
+            tmp['title'] = _row.find(attrs={'class':'tit'}).text
+            tmp['content'] = _row.find(attrs={'class':'normal-text'}).text
+            item.append(tmp)
+        except:
+            pass
+        # modal_id = _row.find(attrs={'class': 'url'})['data-target'].replace('#','')
+        # modal = body.find(attrs={'id':modal_id})
+        # print modal.find(attrs={'class':'uglify-arcticle'})
+
+    return JsonResponse({'data': item, 'now_time': timezone.now()})
