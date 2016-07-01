@@ -14,7 +14,7 @@ import os
 import codecs
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# if encode error utf8mb4  use this
 codecs.register(lambda name: codecs.lookup('utf8') if name == 'utf8mb4' else None)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
