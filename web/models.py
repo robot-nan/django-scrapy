@@ -38,6 +38,7 @@ class GoldAdvice(BaseTime):
     technology_buy = models.CharField(u'技术指标购买', max_length=32, null=True, blank=True)
     technology_sell = models.CharField(u'技术指标出售', max_length=32, null=True, blank=True)
     show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
+    show_team = models.DateTimeField(u'组')
 
 
 class GoldPivotPoint(BaseTime):

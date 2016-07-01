@@ -2,8 +2,7 @@ from __future__ import absolute_import
 
 import json
 
-
-
+from django.utils import timezone
 from scrapy.exceptions import CloseSpider
 from scrapy.spiders import Spider
 from bs4 import BeautifulSoup
@@ -24,6 +23,7 @@ class GoldGlodInfoSpider(Spider):
     def parse(self, response):
         tmp ={}
         item = GlodItem()
+        now_time = timezone.now()
         try:
             advice = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[1]/td[2]/span/text()')
             move_1 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[2]/td[2]/text()')
@@ -41,6 +41,8 @@ class GoldGlodInfoSpider(Spider):
                 item['technology_buy'] = technology_2[_index].extract().strip()
                 item['technology_sell'] = technology_3[_index].extract().strip()
                 item['show_data'] = _index
+                item['show_team'] = now_time
+
                 yield item
             # for a,x,c,s,d,we,r in zip(advice,move_1,move_2,move_3,technology_1,technology_2,technology_3):
 
