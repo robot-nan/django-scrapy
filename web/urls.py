@@ -2,5 +2,6 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('web.views',
-                       url(r'^get/advice/now/$', 'glod_advice', name='glod advice'),
+                       url(r'^gold/advice/now/$', 'gold_advice', name='gold advice'),
+                       url(r'^kxt/(?P<date>.*)/$', 'get_kxt', name='get kxt'),
                        )

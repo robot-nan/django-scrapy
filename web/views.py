@@ -1,11 +1,15 @@
 # coding:utf-8
+import json
 import urllib2
 
-from django.http import JsonResponse, HttpResponse
+import requests
+from django.http import JsonResponse
+from bs4 import BeautifulSoup
 from django.utils import timezone
 from lxml import etree
 
-def glod_advice(request):
+
+def gold_advice(request):
     url = 'http://www.goldtoutiao.com/techanalysis/USOil'
     response = urllib2.urlopen(url)
     item = []
@@ -30,4 +34,27 @@ def glod_advice(request):
         tmp['show_data'] = _index
         item.append(tmp)
 
-    return JsonResponse({'data': item,'now_time':timezone.now()})
+    return JsonResponse({'data': item, 'now_time': timezone.now()})
+
+
+def get_kxt(request, date=None):
+    res = requests.get('http://www.kxt.com/cjrl/ajax?date={date}'.format(date=date))
+    res = json.loads(res.content)
+    soup = BeautifulSoup(res['data']['pc']['cjDataHtml'],'html.parser')
+    soup = soup.find_all(attrs={'class':'rlDateItem'})
+    item = []
+    for _row in soup:
+        tmp = {}
+        line = _row.find_all('td')
+        tmp['time'] = line[0].text
+        tmp['region'] = line[1].text
+        tmp['title'] = line[2].text
+        tmp['important'] = line[3].text
+        tmp['previous_value'] = line[4].text
+        tmp['predict_value'] = line[5].text
+        tmp['publish'] = line[6].text
+        tmp['judge'] = line[7].text
+        item.append(tmp)
+    return JsonResponse({'data': item, 'now_time': timezone.now()})
+
+

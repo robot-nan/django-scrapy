@@ -20,5 +20,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
                   url(r'^admin/', admin.site.urls),
-                  url(r'^gold/', include('web.urls')),
+                  url(r'^get_json/', include('web.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
