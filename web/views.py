@@ -1,8 +1,8 @@
 # coding:utf-8
 import urllib2
 
-
 from django.http import JsonResponse, HttpResponse
+from django.utils import timezone
 from lxml import etree
 
 def glod_advice(request):
@@ -30,4 +30,4 @@ def glod_advice(request):
         tmp['show_data'] = _index
         item.append(tmp)
 
-    return JsonResponse({'data': item})
+    return JsonResponse({'data': item,'now_time':timezone.now()})
