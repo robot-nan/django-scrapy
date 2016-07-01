@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'super_worm.wsgi.application'
 #         'PASSWORD': '1234qwer',
 #         'HOST': 'www.chinayunju.com',
 #         'PORT': 3306,
-#         'OPTIONS': {'charset': 'utf8mb4'}
+#         # 'OPTIONS': {'charset': 'utf8mb4'}
 #     }
 # }
 DATABASES = {
