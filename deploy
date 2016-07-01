@@ -20,6 +20,17 @@ git clone 'your project website'
 4.
 apt-get install mysql-server mysql-client
 apt-get install python-mysqldb
+mysql -uroot -p
+use mysql;
+
+if not has "%":
+    mysql> update user set host='%' where user='root';
+    mysql> flush privileges;
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'set user'@'%' IDENTIFIED BY 'set password' WITH GRANT OPTION;
+mysql> flush privileges;
+mysql> CREATE DATABASE db_name DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 pip install django==1.9.7
 pip install gevent==1.1.1
 pip install gunicorn==19.6.0
