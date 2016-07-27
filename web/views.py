@@ -65,16 +65,41 @@ def get_yuncaijing(request):
     body = BeautifulSoup(res.content, 'html.parser')
     soup = body.find(attrs={'class': 'neican-list'})
     for _row in soup.find_all('li'):
-        tmp ={}
+        tmp = {}
         try:
             tmp['time'] = _row.find('time').text
-            tmp['title'] = _row.find(attrs={'class':'tit'}).text
-            tmp['content'] = _row.find(attrs={'class':'normal-text'}).text
+            tmp['title'] = _row.find(attrs={'class': 'tit'}).text
+            tmp['content'] = _row.find(attrs={'class': 'normal-text'}).text
             item.append(tmp)
         except:
             pass
-        # modal_id = _row.find(attrs={'class': 'url'})['data-target'].replace('#','')
-        # modal = body.find(attrs={'id':modal_id})
-        # print modal.find(attrs={'class':'uglify-arcticle'})
+            # modal_id = _row.find(attrs={'class': 'url'})['data-target'].replace('#','')
+            # modal = body.find(attrs={'id':modal_id})
+            # print modal.find(attrs={'class':'uglify-arcticle'})
 
     return JsonResponse({'data': item, 'now_time': timezone.now()})
+
+
+def get_yuncaijing_insider(request):
+    item = []
+    url = request.GET.get('url', '')
+    if url:
+        res = requests.get(url)
+    else:
+        res = requests.get('http://www.yuncaijing.com/insider/main.html')
+        body = BeautifulSoup(res.content, 'html.parser')
+        soup = body.find(attrs={'class': 'main'})
+        for _row in soup.findAll('li', {'class': 'pr'}):
+            tmp = {}
+            try:
+                tmp['time'] = _row.find('kbd').text.strip()
+                tmp['title'] = _row.find('a').text.strip()
+                tmp['content'] = _row.find(attrs={'class', 'nc-con'}).text.strip()
+                tmp['content_info_url'] = 'http://www.yuncaijing.com' + _row.find('a')['href']
+
+                item.append(tmp)
+            except:
+                pass
+    return JsonResponse({'data': item, 'content_info': res.content, 'now_time': timezone.now()})
+
+#
