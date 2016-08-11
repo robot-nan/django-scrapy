@@ -38,7 +38,10 @@ def gold_advice(request):
 
 
 def get_kxt(request, date=None):
-    res = requests.get('http://www.kxt.com/cjrl/ajax?date={date}'.format(date=date))
+    headers = {
+        'X-Requested-With': 'XMLHttpRequest',
+    }
+    res = requests.get('http://www.kxt.com/cjrl/ajax?date={date}'.format(date=date),headers=headers)
     res = json.loads(res.content)
     soup = BeautifulSoup(res['data']['pc']['cjDataHtml'], 'html.parser')
     soup = soup.find_all(attrs={'class': 'rlDateItem'})
@@ -101,5 +104,39 @@ def get_yuncaijing_insider(request):
             except:
                 pass
     return JsonResponse({'data': item, 'content_info': res.content, 'now_time': timezone.now()})
-
 #
+#
+# #
+# import grequests
+#
+#
+# def exception_handler(request, exception):
+#     print "Request failed"
+#
+#
+# urls = [
+#     'http://www.baidu.com',
+#     'http://www.hao123.com',
+#     'http://www.163.com',
+#     'http://www.taobao.com', 'http://www.baidu.com',
+#     'http://www.hao123.com',
+#     'http://www.163.com',
+#     'http://www.taobao.com', 'http://www.baidu.com',
+#     'http://www.hao123.com',
+#     'http://www.163.com',
+#     'http://www.taobao.com', 'http://www.baidu.com',
+#     'http://www.hao123.com',
+#     'http://www.163.com',
+#     'http://www.taobao.com', 'http://www.baidu.com',
+#     'http://www.hao123.com',
+#     'http://www.163.com',
+#     'http://www.taobao.com', 'http://www.baidu.com',
+#     'http://www.hao123.com',
+#     'http://www.163.com',
+#     'http://www.taobao.com', 'http://www.baidu.com',
+#     'http://www.hao123.com',
+#     'http://www.163.com',
+#     'http://www.taobao.com',
+# ]
+# rs = (grequests.get(u) for u in urls)
+# grequests.map(rs)
