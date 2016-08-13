@@ -4,6 +4,5 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('web.views',
                        url(r'^gold/advice/now/$', 'gold_advice', name='gold advice'),
                        url(r'^kxt/(?P<date>.*)/$', 'get_kxt', name='get kxt'),
-                       url(r'^yuncaijing/$', 'get_yuncaijing_insider', name='get yuncaijing insider'),
                        url(r'^yuncaijing/info/$', 'get_yuncaijing_insider', name='get yuncaijing insider'),
                        )

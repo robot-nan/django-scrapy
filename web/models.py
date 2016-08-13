@@ -28,15 +28,9 @@ class BaseTime(models.Model):
         ordering = ['-id', ]
 
 
-class GoldAdvice(BaseTime):
-    """综合建议"""
-    composite_advice = models.CharField(u'综合建议', max_length=32, null=True, blank=True)
-    average_advice = models.CharField(u'平均指数建议', max_length=32, null=True, blank=True)
-    average_buy = models.CharField(u'平均购买', max_length=32, null=True, blank=True)
-    average_sell = models.CharField(u'平均出售', max_length=32, null=True, blank=True)
-    technology_advice = models.CharField(u'技术指标建议', max_length=32, null=True, blank=True)
-    technology_buy = models.CharField(u'技术指标购买', max_length=32, null=True, blank=True)
-    technology_sell = models.CharField(u'技术指标出售', max_length=32, null=True, blank=True)
-    show_data = models.CharField(u'更新区间', max_length=2, choices=GlOD_SHOW_TIME_CHOICE, default=u'0')
-    show_team = models.DateTimeField(u'组')
-
+class Yuncaijing(BaseTime):
+    new_id = models.CharField(u'新闻id', max_length=32, null=True, blank=True)
+    title = models.CharField(u'标题', max_length=32, null=True, blank=True)
+    description = models.TextField(u'描述', max_length=32, null=True, blank=True)
+    content_info = models.TextField(u'文章内容', max_length=32, null=True, blank=True)
+    pub_time = models.CharField(u'发布时间', max_length=32, null=True, blank=True)

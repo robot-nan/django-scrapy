@@ -80,29 +80,29 @@ WSGI_APPLICATION = 'super_worm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'super_worm',
-#         'USER': 'robot',
-#         'PASSWORD': '1234qwer',
-#         'HOST': 'www.chinayunju.com',
-#         'PORT': 3306,
-#         # 'OPTIONS': {'charset': 'utf8mb4'}
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'super_worm',
-        'USER': 'root',
+        'USER': 'robot',
         'PASSWORD': '1234qwer',
-        'HOST': '127.0.0.1',
+        'HOST': 'www.chinayunju.com',
         'PORT': 3306,
         'OPTIONS': {'charset': 'utf8mb4'}
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'super_worm',
+#         'USER': 'root',
+#         'PASSWORD': '1234qwer',
+#         'HOST': '127.0.0.1',
+#         'PORT': 3306,
+#         'OPTIONS': {'charset': 'utf8mb4'}
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
