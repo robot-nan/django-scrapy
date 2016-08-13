@@ -22,7 +22,7 @@ def get_yuncaijing_insider():
             _res = json.loads(_res.content)
             _res = _res['data']['news']
             _res = Yuncaijing(
-                new_id= _res['id'],
+                id= _res['id'],
                 title = _res['title'],
                 description = _res['description'],
                 content_info = _res['content'],

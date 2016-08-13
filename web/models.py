@@ -29,9 +29,10 @@ class BaseTime(models.Model):
 
 
 class Yuncaijing(BaseTime):
-    new_id = models.CharField(u'新闻id', max_length=32, null=True, blank=True)
     title = models.CharField(u'标题', max_length=32, null=True, blank=True)
     description = models.TextField(u'描述', max_length=32, null=True, blank=True)
     content_info = models.TextField(u'文章内容', max_length=32, null=True, blank=True)
     pub_time = models.CharField(u'发布时间', max_length=32, null=True, blank=True)
 
+    def __unicode__(self):
+        return self.title
