@@ -9,7 +9,7 @@ apt-get install supervisor
 2.
 pip install virtualenv
 pip install virtualenvwrapper
-
+pip install django-crontab
 3.
 mkvirtualenv 'your virtualenv directory'
 workon 'your virtualenv directory'

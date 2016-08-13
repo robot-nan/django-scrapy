@@ -34,3 +34,4 @@ class Yuncaijing(BaseTime):
     description = models.TextField(u'描述', max_length=32, null=True, blank=True)
     content_info = models.TextField(u'文章内容', max_length=32, null=True, blank=True)
     pub_time = models.CharField(u'发布时间', max_length=32, null=True, blank=True)
+

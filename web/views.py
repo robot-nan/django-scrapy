@@ -64,35 +64,6 @@ def get_kxt(request, date=None):
 
 
 
-def get_yuncaijing_insider(request):
-    item = []
-
-    res = requests.get('http://www.yuncaijing.com/insider/main.html')
-    body = BeautifulSoup(res.content, 'html.parser')
-    soup = body.find(attrs={'class': 'main'})
-    item = []
-    for _row in soup.findAll('li', {'class': 'pr'}):
-        context = {}
-        try:
-            news_id = _row.find('a')['href'].split('id_')[-1].split('.')[0]
-            headers = {
-                "X-Requested-With":'XMLHttpRequest'
-            }
-            news_info_url  = 'http://www.yuncaijing.com/news/modal/'+ news_id
-            _res = requests.get(news_info_url, headers=headers)
-            _res = json.loads(_res.content)
-            _res = _re['data']['news']
-            context['title'] = _res['title']
-            context['content_info'] = _res['content']
-            context['description'] = _res['description']
-            context['time'] = _res['inputtime']
-            context['new_id'] = _res['id']
-            item.append(context)
-        except Exception as e:
-            print e
-    Yuncaijing.objects.bulk_create(item)
-    return JsonResponse({'data': item, 'content_info': res.content, 'now_time': timezone.now()})
-#
 #
 # #
 # import grequests

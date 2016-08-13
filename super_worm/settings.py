@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
     'gunicorn',
     'web'
 ]
@@ -136,3 +137,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+
+CRONTAB_LOCK_JOBS = True
+CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage.py'
+CRONJOBS = [
+    ('* */1 * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
+
+]
