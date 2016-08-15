@@ -141,5 +141,5 @@ USE_TZ = True
 CRONTAB_LOCK_JOBS = True
 CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage.py'
 CRONJOBS = [
-    ('*/20  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
+    ('*/5  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
 ]
