@@ -1,8 +1,9 @@
 # coding:utf-8
 import json
 import urllib2
-
 import requests
+from collections import OrderedDict
+
 from django.http import JsonResponse
 from bs4 import BeautifulSoup
 from django.utils import timezone
@@ -43,7 +44,7 @@ def get_kxt(request, date=None):
     headers = {
         'X-Requested-With': 'XMLHttpRequest',
     }
-    res = requests.get('http://www.kxt.com/cjrl/ajax?date={date}'.format(date=date),headers=headers)
+    res = requests.get('http://www.kxt.com/cjrl/ajax?date={date}'.format(date=date), headers=headers)
     res = json.loads(res.content)
     soup = BeautifulSoup(res['data']['pc']['cjDataHtml'], 'html.parser')
     soup = soup.find_all(attrs={'class': 'rlDateItem'})
@@ -63,9 +64,47 @@ def get_kxt(request, date=None):
     return JsonResponse({'data': item, 'now_time': timezone.now()})
 
 
+def get_investing(request):
+    url = "http://cn.investing.com/technical/%E5%95%86%E5%93%81-%E6%8C%87%E6%A0%87"
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, 'html.parser')
 
-#
-# #
+    data = OrderedDict((
+        ('gold', []),
+        ('silver', []),
+        ('copper', []),
+        ('oil', []),
+        ('gas', []),
+        ('wheat', []),
+    ))
+    for _num in xrange(0, 11 + 1):
+        info_soup = soup.find_all(attrs={'id': 'pair_{num}'.format(num=_num)})
+        res_soup = soup.find_all(attrs={'class': 'movingAveragesTbl'})
+        for _value, _res, _key in zip(info_soup, res_soup, data):
+            _tmp = _res.find_all('td')[:-1]
+            _buy = _tmp[0].text
+            _sale = _tmp[1].text
+            _mid = _tmp[2].text
+            _summary = _res.find('span').text
+
+            data[_key].append({'name': _value.find(attrs={'id': 'pair_name_{num}'.format(num=_num)}).text,
+                               'value': _value.find(attrs={'id': 'open_{num}'.format(num=_num)}).text,
+                               'res':
+                                   {
+                                       'buy': _buy,
+                                       'sale': _sale,
+                                       'mid': _mid,
+                                       'summary': _summary
+                                   },
+                               'action': _value.find('span').text
+                               }
+                              )
+
+
+
+
+    return JsonResponse({'data': data, 'now_time': timezone.now()})
+
 # import grequests
 #
 #
