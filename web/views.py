@@ -100,10 +100,11 @@ def get_investing(request):
                                }
                               )
 
-
-
-
     return JsonResponse({'data': data, 'now_time': timezone.now()})
+
+
+
+
 
 # import grequests
 #
