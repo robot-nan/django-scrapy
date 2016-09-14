@@ -1,5 +1,6 @@
 # coding:utf-8
 import json
+import re
 import urllib2
 import requests
 from collections import OrderedDict
@@ -103,8 +104,49 @@ def get_investing(request):
     return JsonResponse({'data': data, 'now_time': timezone.now()})
 
 
+def wezone(request,code):
+    data = {}
+
+    res = requests.get('http://wx.wezone.wang/stock/detail?code='+code)
+    code = re.findall('"http://hq.sinajs.cn/list=(?P<date>.*)"', res.content)[0]
+    url = 'http://hq.sinajs.cn/list=' + code
+    _res = requests.get(url)
+    now_price = _res.content.split(',')[1]
+    last_price = _res.content.split(',')[2]
+    # 现价
+    data['xj'] = now_price
+    # 涨跌幅
+    last_price = float(last_price)
+    now_price = float(now_price)
+    data['zdf'] = last_price - now_price
+    # 涨跌
+    data['zd'] = (now_price - last_price) / last_price * 100
+    soup = BeautifulSoup(res.content, 'html.parser')
+    data['name'] = soup.title.text
+    # 机构评级
+    data['jgpj'] = soup.select('.am-panel-default.doc-content table tr .am-text-default')[0].text
+    _soup = soup.select('.am-panel-default.doc-content table tr')[1]
+    # 综合评分
+    data['scores'] = _soup.select('td span')[0].text
+    # 打败多少人
+    data['pk'] = _soup.select('td div')[2].text
+    # 诊断说明
+    data['des'] = _soup.select('.mydiv')[0].text.strip()
 
 
+    for _block_soup in soup.select('.am-g.am-g-fixed section'):
+        _main_key = _block_soup.select('div h3')[0].text
+        data[_main_key] = {}
+        for _row in _block_soup.find_all('tr'):
+            try:
+                _key = _row.find_all('td')[0].text
+                _value = _row.find_all('td')[1].text
+                data[_main_key][_key] = _value
+            except:
+                pass
+    print data
+
+    return JsonResponse({'data': data, 'now_time': timezone.now()})
 
 # import grequests
 #
