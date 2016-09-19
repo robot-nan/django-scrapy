@@ -151,44 +151,44 @@ CRONJOBS = [
     ('*/10  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
     ('*/10  * * * *', 'web.tasks.get_guzhang', '>> /var/log/super_worm/get_guzhang.log'),
 ]
-# #
-# # LOGGING = {
-# #     'version': 1,
-# #     'disable_existing_loggers': True,
-# #     'formatters': {
-# #         'verbose': {
-# #             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-# #         },
-# #         'websocket': {
-# #             'format': '%(asctime)s %(process)d:%(name)s %(levelname)s: %(message)s'
-# #         }
-# #     },
-# #     'handlers': {
-# #         'file': {
-# #             'level': 'DEBUG',
-# #             'class': 'logging.handlers.RotatingFileHandler',
-# #             'filename': os.path.join(os.getenv('TEMP') if (os.name == 'nt') else '/var/log/super_worm', 'super_worm.log'),
-# #             'maxBytes': 1024 * 1024 * 20,
-# #             'backupCount': 20,
-# #             'formatter': 'verbose'
-# #         },
-# #         'cron_file': {
-# #             'level': 'DEBUG',
-# #             'class': 'logging.handlers.RotatingFileHandler',
-# #             'filename': os.path.join(os.getenv('TEMP') if (os.name == 'nt') else '/var/log/super_worm', 'django_crontab.log'),
-# #             'maxBytes': 1024 * 1024 * 20,
-# #             'backupCount': 20,
-# #             'formatter': 'verbose'
-# #         }
-# #     },
-# #     'loggers': {
-# #         'django': {
-# #             'handlers': ['file'],
-# #             'level': 'INFO',
-# #         },
-# #         'django_crontab': {
-# #             'handlers': ['cron_file'],
-# #             'level': 'INFO',
-# #         }
-# #     }
-# # }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'websocket': {
+            'format': '%(asctime)s %(process)d:%(name)s %(levelname)s: %(message)s'
+        }
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(os.getenv('TEMP') if (os.name == 'nt') else '/var/log/super_worm', 'super_worm.log'),
+            'maxBytes': 1024 * 1024 * 20,
+            'backupCount': 20,
+            'formatter': 'verbose'
+        },
+        'cron_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(os.getenv('TEMP') if (os.name == 'nt') else '/var/log/super_worm', 'django_crontab.log'),
+            'maxBytes': 1024 * 1024 * 20,
+            'backupCount': 20,
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+        },
+        'django_crontab': {
+            'handlers': ['cron_file'],
+            'level': 'INFO',
+        }
+    }
+}
