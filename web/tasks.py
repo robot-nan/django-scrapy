@@ -1,15 +1,16 @@
 # coding: utf-8
 
 import random
-
-from bs4 import BeautifulSoup
 import requests
 import json
+import sys
+from bs4 import BeautifulSoup
 
 from django.utils import timezone
-
 from web.models import Yuncaijing, Guzhang
 
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 def get_yuncaijing_insider():
     print u'开始抓取 www.yuncaijing.com --- 时间:%s' % (timezone.localtime(timezone.now()).strftime('%F %R'))
