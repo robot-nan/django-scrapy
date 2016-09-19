@@ -146,7 +146,7 @@ STATICFILES_FINDERS = (
 
 CRONTAB_LOCK_JOBS = True
 
-CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage.py'
+CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage_production.py'
 CRONJOBS = [
     ('*/10  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
     ('*/10  * * * *', 'web.tasks.get_guzhang', '>> /var/log/super_worm/get_guzhang.log'),
