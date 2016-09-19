@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import codecs
+print \
+"""
+####################################
+#        run local settings        #
+####################################
+"""
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # if encode error utf8mb4  use this
@@ -36,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_crontab',
+    # 'django_crontab',
     'gunicorn',
     'web'
 ]
@@ -86,24 +93,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'super_worm',
         'USER': 'robot',
-        'PASSWORD': '1234qwer',
-        'HOST': 'www.chinayunju.com',
+        'PASSWORD': '1234qwer!@#',
+        'HOST': 'superworm.mysql.rds.aliyuncs.com',
         'PORT': 3306,
         'OPTIONS': {'charset': 'utf8mb4'}
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'super_worm',
-#         'USER': 'root',
-#         'PASSWORD': '1234qwer',
-#         'HOST': '127.0.0.1',
-#         'PORT': 3306,
-#         'OPTIONS': {'charset': 'utf8mb4'}
-#     }
-# }
+
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -134,16 +131,15 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+#
 # CRONTAB_LOCK_JOBS = True
 # CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage.py'
 # CRONJOBS = [
 #     ('*/5  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
 # ]
-
+#
 # LOGGING = {
 #     'version': 1,
 #     'disable_existing_loggers': True,
