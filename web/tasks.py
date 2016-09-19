@@ -51,7 +51,7 @@ def get_guzhang():
                 'real_time': _index[u'realtime'],
                 'news_time_title': _index[u'newstimetitle'],
                 'class_name': _index[u'classname'],
-                'news_all_text': _index[u'newsalltext'],
+                'news_all_text': _index[u'newsalltext'].strip(),
             }
             Guzhang.objects.update_or_create(news_id=news_id, defaults=q)
     except Exception as e:
