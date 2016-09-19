@@ -36,3 +36,17 @@ class Yuncaijing(BaseTime):
 
     def __unicode__(self):
         return self.title
+
+
+class Guzhang(BaseTime):
+    news_id = models.IntegerField(u'新闻ID', default=0)
+    title = models.CharField(u'标题', max_length=256, null=True, blank=True)
+    news_text = models.TextField(u'描述', blank=True, default=u'')
+    news_time = models.CharField(u'发布时间', max_length=32, null=True, blank=True)
+    real_time = models.CharField(u'发布时间', max_length=32, null=True, blank=True)
+    news_time_title = models.CharField(u'发布时间', max_length=32, null=True, blank=True)
+    class_name = models.CharField(u'发布时间', max_length=16, null=True, blank=True)
+    news_all_text =  models.TextField(u'内容', blank=True, default=u'')
+
+    def __unicode__(self):
+        return self.title

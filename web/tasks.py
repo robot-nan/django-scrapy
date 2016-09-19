@@ -1,15 +1,17 @@
 # coding:utf-8
+import random
+
 from bs4 import BeautifulSoup
 import requests
 import json
 
 from django.utils import timezone
 
-from web.models import Yuncaijing
+from web.models import Yuncaijing, Guzhang
 
 
 def get_yuncaijing_insider():
-    print u'开始抓取 yuncaijing --- 时间:%s' % (timezone.localtime(timezone.now()).strftime('%F %R'))
+    print u'开始抓取 www.yuncaijing.com --- 时间:%s' % (timezone.localtime(timezone.now()).strftime('%F %R'))
     try:
         res = requests.get('http://www.yuncaijing.com/insider/main.html')
         body = BeautifulSoup(res.content, 'html.parser')
@@ -31,5 +33,26 @@ def get_yuncaijing_insider():
             _tmp['content_info'] = res['content']
             _tmp['pub_time'] = res['inputtime']
             Yuncaijing.objects.update_or_create(id=res['id'], defaults=_tmp)
+    except Exception as e:
+        print u'error --- %s --- 时间:%s' % (e, timezone.localtime(timezone.now()).strftime('%F %R'))
+
+
+def get_guzhang():
+    print u'开始抓取 www.guzhang.com --- 时间:%s' % (timezone.localtime(timezone.now()).strftime('%F %R'))
+    url = u'http://www.guzhang.com/e/extend/info/t.php?random=' + str(random.random())
+    try:
+        res = requests.get(url)
+        for _index in res.json():
+            news_id = int(_index[u'titleurl'].split('/')[-1])
+            q = {
+                'title': _index[u'title'],
+                'news_text': _index[u'newstext'].strip(),
+                'news_time': _index[u'newstime'],
+                'real_time': _index[u'realtime'],
+                'news_time_title': _index[u'newstimetitle'],
+                'class_name': _index[u'classname'],
+                'news_all_text': _index[u'newsalltext'],
+            }
+            Guzhang.objects.update_or_create(news_id=news_id, defaults=q)
     except Exception as e:
         print u'error --- %s --- 时间:%s' % (e, timezone.localtime(timezone.now()).strftime('%F %R'))
