@@ -125,6 +125,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
+ugettext = lambda s: s
+LANGUAGES = [
+    ('zh', ugettext('Chinese')),
+    ('zh_CN', ugettext('Chinese')),
+    ('en', ugettext('English')),
+]
 
 LANGUAGE_CODE = 'zh-hans'
 
@@ -148,7 +154,7 @@ CRONTAB_LOCK_JOBS = True
 
 CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage_production.py'
 CRONJOBS = [
-    ('*/10  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
+    ('*/9  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
     ('*/10  * * * *', 'web.tasks.get_guzhang', '>> /var/log/super_worm/get_guzhang.log'),
 ]
 
