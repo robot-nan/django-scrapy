@@ -150,7 +150,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-CRONTAB_LOCK_JOBS = True
+CRONTAB_LOCK_JOBS = False
 
 CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage_production.py'
 CRONJOBS = [
