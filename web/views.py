@@ -1,16 +1,14 @@
 # coding:utf-8
 import json
 import re
+import tushare as ts
 import urllib2
 import requests
 from collections import OrderedDict
-
 from django.http import JsonResponse
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from lxml import etree
-
-from web.models import Yuncaijing
 
 
 def gold_advice(request):
@@ -144,40 +142,8 @@ def wezone(request,code):
                 data[_main_key][_key] = _value
             except:
                 pass
-    print data
-
     return JsonResponse({'data': data, 'now_time': timezone.now()})
 
-# import grequests
-#
-#
-# def exception_handler(request, exception):
-#     print "Request failed"
-#
-#
-# urls = [
-#     'http://www.baidu.com',
-#     'http://www.hao123.com',
-#     'http://www.163.com',
-#     'http://www.taobao.com', 'http://www.baidu.com',
-#     'http://www.hao123.com',
-#     'http://www.163.com',
-#     'http://www.taobao.com', 'http://www.baidu.com',
-#     'http://www.hao123.com',
-#     'http://www.163.com',
-#     'http://www.taobao.com', 'http://www.baidu.com',
-#     'http://www.hao123.com',
-#     'http://www.163.com',
-#     'http://www.taobao.com', 'http://www.baidu.com',
-#     'http://www.hao123.com',
-#     'http://www.163.com',
-#     'http://www.taobao.com', 'http://www.baidu.com',
-#     'http://www.hao123.com',
-#     'http://www.163.com',
-#     'http://www.taobao.com', 'http://www.baidu.com',
-#     'http://www.hao123.com',
-#     'http://www.163.com',
-#     'http://www.taobao.com',
-# ]
-# rs = (grequests.get(u) for u in urls)
-# grequests.map(rs)
+def get_k_line_data(request,code):
+    res = ts.get_hist_data(code)
+    return JsonResponse(res.to_json(orient='split'), safe=False)
