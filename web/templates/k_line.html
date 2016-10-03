@@ -17,7 +17,7 @@
         text: '努力加载中请稍后'
     });
     app.title = '';
-    url = '{% url 'get data' '600848' %}';
+    url = '{% url 'get data' '601398' %}';
     $.get(url, function (res) {
         raw_data = JSON.parse(res);
         datas = raw_data['index'].reverse();
