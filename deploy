@@ -10,6 +10,7 @@ apt-get install supervisor
 pip install virtualenv
 pip install virtualenvwrapper
 pip install django-crontab
+pip install tushare
 3.
 mkvirtualenv 'your virtualenv directory'
 workon 'your virtualenv directory'

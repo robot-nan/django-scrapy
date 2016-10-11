@@ -17,8 +17,12 @@ from django.conf.urls import patterns, url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
-                  url(r'^admin/', admin.site.urls),
-                  url(r'^get_json/', include('web.urls')),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^admin/', admin.site.urls),
+    url(r'^get_json/', include('web.urls')),
+    url(r'^finance/', include('finance.urls')),
+
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
