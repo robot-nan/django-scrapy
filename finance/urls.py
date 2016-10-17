@@ -10,3 +10,4 @@ urlpatterns = patterns('finance.views',
                        url(r'^stock/stop_loss/(?P<code>.*)/$', 'stop_loss', name='stop loss'),
 
                        )
+
