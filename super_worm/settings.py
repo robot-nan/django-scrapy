@@ -23,12 +23,12 @@ codecs.register(lambda name: codecs.lookup('utf8') if name == 'utf8mb4' else Non
 SECRET_KEY = '94(%%3un8vtf3=u-b3gm%0r!!h3(j#e01rfmo#b$+=bg6w3o#('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
-
+COMPRESS_ENABLED = True
 # Application definition
-
+TEMPLATE_DEBUG = DEBUG
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

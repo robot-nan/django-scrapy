@@ -109,19 +109,21 @@ def wezone(request, code):
     data = {}
 
     res = requests.get('http://wx.wezone.wang/stock/detail?code=' + code)
+
     code = re.findall('"http://hq.sinajs.cn/list=(?P<date>.*)"', res.content)[0]
     url = 'http://hq.sinajs.cn/list=' + code
     _res = requests.get(url)
-    now_price = _res.content.split(',')[1]
+
+    now_price = _res.content.split(',')[3]
     last_price = _res.content.split(',')[2]
     # 现价
     data['xj'] = now_price
     # 涨跌幅
     last_price = float(last_price)
     now_price = float(now_price)
-    data['zdf'] = last_price - now_price
+    data['zd'] = now_price - last_price
     # 涨跌
-    data['zd'] = (now_price - last_price) / last_price * 100
+    data['zdf'] = (now_price - last_price) / last_price * 100
     soup = BeautifulSoup(res.content, 'html.parser')
     data['name'] = soup.title.text
     # 机构评级
@@ -145,3 +147,11 @@ def wezone(request, code):
             except:
                 pass
     return JsonResponse({'data': data, 'now_time': timezone.now()})
+
+
+def stock_finance_sina(request, code):
+    url = 'http://vip.stock.finance.sina.com.cn/q/go.php/vInvestConsult/kind/qgqp/index.phtml?symbol=' + code
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, 'html.parser')
+    tr = soup.select('table tr')[1]
+    return JsonResponse(tr.find_all('td')[2].text,safe=False)
