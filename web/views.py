@@ -150,8 +150,15 @@ def wezone(request, code):
 
 
 def stock_finance_sina(request, code):
-    url = 'http://vip.stock.finance.sina.com.cn/q/go.php/vInvestConsult/kind/qgqp/index.phtml?symbol=' + code
+    url = 'http://vip.stock.finance.sina.com.cn/q/go.php/vInvestConsult/kind/singleqgqp/index.phtml?num=60&symbol=' + code
     res = requests.get(url)
     soup = BeautifulSoup(res.content, 'html.parser')
-    tr = soup.select('table tr')[1]
-    return JsonResponse(tr.find_all('td')[2].text,safe=False)
+    trs = soup.select('table tr')
+    res = {}
+    for _row in trs[1:]:
+        _code = _row.find_all('td')[0].text
+        _name = _row.find_all('td')[1].text
+        _data = _row.find_all('td')[2].text
+        _comment = _row.find_all('td')[3].text
+        res[_data] = [_code,_name,_comment]
+    return JsonResponse(res,safe=False)

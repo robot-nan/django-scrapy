@@ -45,8 +45,9 @@ class TushareStock(object):
         return (sum([open, high, low]) / 3 * 2 * (3 - 1)) / (3 + 1)
 
     def stop_loss(self):
-        # 止损价：不包括当天   5日内收盘价的最高值*0.95
-        return tushare.get_hist_data(code=self.code).head(5).close.max() * 0.95
+        # 止损价 昨日开盘价*0.95
+        open = self.yesterday_open_price()
+        return open * 0.95
 
     def stop_make_money(self):
         # 止盈价：昨天的最高价*0.95
@@ -57,16 +58,10 @@ class TushareStock(object):
         return tushare.get_hist_data(code=self.code).head(19).high.max()
 
     def tomorrow_buy_point(self):
-        # 明日买点：算今天的 在收盘后 计算
-        # ((开盘价+最高价+最低价)/3*2*(4-1))/(4+1)+((最高价+最低价)/2-3日前的(开盘价+最高价+最低价)/3）/4
+        # 明日买点：（昨日最低价 - 昨日开盘价 * 0.95） / 5 + 昨日最低价
         open = self.yesterday_open_price()
-        high = self.yesterday_high_price()
         low = self.yesterday_low_price()
-        before_3days_data = tushare.get_hist_data(code=self.code).head(4)[1:]
-        open_before_3days = before_3days_data.iloc[[-1]].open.iat[0]
-        high_before_3days = before_3days_data.iloc[[-1]].high.iat[0]
-        low_before_3days = before_3days_data.iloc[[-1]].low.iat[0]
-        return ((open + high + low) / 3 * 2 * (4 - 1)) / (4 + 1) + ((high + low) / 2 - (open_before_3days + high_before_3days + low_before_3days) / 3) / 4
+        return (low - open * 0.95) / 5 + low
 
     def yesterday_prediction_point(self):
         # 昨测今日买点：1日前的((开盘价+最高价+最低价)/3*2*(4-1))/(4+1)+((最高价+最低价)/2-3日前的(开盘价+最高价+最低价)/3）/4
@@ -83,15 +78,3 @@ if __name__ == '__main__':
     # print ts.stop_make_money()
     # print ts.drag()
     print ts.tomorrow_buy_point()
-
-
-
-
-
-
-
-
-
-
-
-
