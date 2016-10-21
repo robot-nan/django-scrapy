@@ -15,6 +15,7 @@ def get_yuncaijing_insider():
             "User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36'
         }
         res = requests.get('http://www.yuncaijing.com/insider/main.html', headers=yuncaijing_headers)
+        print res.content
         body = BeautifulSoup(res.content, 'html.parser')
         soup = body.find(attrs={'class': 'main'})
         for _row in soup.findAll('li', {'class': 'pr'})[:-1]:

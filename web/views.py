@@ -160,5 +160,24 @@ def stock_finance_sina(request, code):
         _name = _row.find_all('td')[1].text
         _data = _row.find_all('td')[2].text
         _comment = _row.find_all('td')[3].text
-        res[_data] = [_code,_name,_comment]
-    return JsonResponse(res,safe=False)
+        res[_data] = [_code, _name, _comment]
+    return JsonResponse(res, safe=False)
+
+
+def caiku(request, code):
+    url = 'http://www.caiku.com/stock/' + code + '/pick.html'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, 'html.parser')
+    prediction_price = soup.select('.st_dt_ri_btm table .tal')[1].text.replace(u'元', '')
+    up = soup.select('.yl')[0].text.split()[-1]
+    down = soup.select('.yr')[0].text.split()[-1]
+    content = {
+        'prediction_price': prediction_price,
+        'up': up,
+        'down': down
+    }
+    return JsonResponse(content)
+
+
+if __name__ == '__main__':
+    pass

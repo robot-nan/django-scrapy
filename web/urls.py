@@ -8,4 +8,5 @@ urlpatterns = patterns('web.views',
                        url(r'^get_investing/$', 'get_investing', name='get investing'),
                        url(r'^wezone/(?P<code>.*)/$', 'wezone', name='wezone'),
                        url(r'^stock_finance_sina/(?P<code>.*)/$', 'stock_finance_sina', name='stock finance sina'),
+                       url(r'^caiku/(?P<code>.*)/$', 'caiku', name='caiku'),
                        )
