@@ -3,15 +3,14 @@ import datetime
 import tushare as ts
 from django.http import JsonResponse
 from django.shortcuts import render
-
 from finance.helper import TushareStock
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 
+@xframe_options_exempt
 def get_k_day_data(request, code):
     now_day = datetime.datetime.now()
     last_day = now_day + datetime.timedelta(days=-1)
-    last_day = last_day.strftime('%Y-%m-%d')
-    context = {}
     code = str(code)
     res_day = ts.get_hist_data(code)
     res_5 = ts.get_hist_data(code, ktype='5')
