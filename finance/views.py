@@ -18,7 +18,7 @@ def get_k_day_data(request, code):
     res_30 = ts.get_hist_data(code, ktype='30')
     res_60 = ts.get_hist_data(code, ktype='60')
     context = {
-        'day': res_day.head(60).to_json(orient='split'),
+        'day': res_day.to_json(orient='split'),
         'min5': res_5.to_json(orient='split'),
         'min15': res_15.to_json(orient='split'),
         'min30': res_30.to_json(orient='split'),
