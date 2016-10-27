@@ -9,4 +9,6 @@ urlpatterns = patterns('web.views',
                        url(r'^wezone/(?P<code>.*)/$', 'wezone', name='wezone'),
                        url(r'^stock_finance_sina/(?P<code>.*)/$', 'stock_finance_sina', name='stock finance sina'),
                        url(r'^caiku/(?P<code>.*)/$', 'caiku', name='caiku'),
+
+                       url(r'^text/$', TemplateView.as_view(template_name='xinqihang/index.html'), name='caiku'),
                        )

@@ -1,0 +1,129 @@
+html, body {
+    min-width: 700px;
+    min-height: 450px;
+    height: 100% !important;
+    width: 100% !important;
+    color: #333;
+}
+
+.container-full {
+    height: 100%;
+}
+
+.bordered {
+    border: 1px solid black;
+}
+
+body {
+    background-color: rgba(86, 153, 255, 0.08) !important;
+}
+
+.top-nav {
+    background-color: white !important;
+
+}
+
+.top-user {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.top-user .ui.left.dropdown.item .icon.big.student {
+    margin-right: 22px;
+}
+
+.top-user .ui.left.dropdown.item span {
+    color: #333;
+}
+
+.top-user .ui.left.dropdown.item .menu .item .right {
+    float: right !important;
+}
+
+.bottom-nav {
+    min-width: 775px;
+    border-top: none !important;
+}
+
+.bottom-nav .icon.home:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.bottom-nav .change-button {
+    margin-left: auto !important;
+    width: 88px;
+    text-align: center;
+    box-shadow: -1px 1px 3px -1px black;
+}
+
+.bottom-nav .change-button p {
+    /*box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);*/
+    line-height: 32px;
+    margin-bottom: 0;
+    font-size: 14px;
+
+}
+
+.bottom-nav .change-button p.active {
+    background: #50a2ff;
+    color: white;
+}
+
+.bottom-nav .change-button p:hover {
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.main-content {
+    position: absolute;
+    bottom: 64px;
+    top: 83px;
+    width: 100%;
+}
+
+.main-content .left {
+    height: 100%;
+
+}
+
+.main-content .left .row {
+    height: 100%;
+}
+
+.main-content .left .ui.link.cards {
+    margin-top: 10px;
+    height: 100%;
+    margin-bottom: 0;
+    padding-left: 30px;
+}
+
+.main-content .left .card {
+    box-shadow: none !important;
+    height: 25%;
+    width: 100% !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.main-content .left .card .content {
+    background: rgba(80, 162, 255, 0.25) !important;
+    box-shadow: 0 1px 1px 2px #a7abaf !important;
+}
+
+.main-content .right {
+    height: 98%;
+    padding-top: 20px;
+}
+
+.main-content .right .content {
+    padding: 10px;
+    height: 100%;
+    box-shadow: 0 1px 1px 2px #a7abaf;
+}
