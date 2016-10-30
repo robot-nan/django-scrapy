@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/xinqihang/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/xinqihang/base.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/semantic.min.css' %}">
     <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
     <script src="{% static 'js/semantic.min.js' %}"></script>
-
+    {% block js %}
+    {% endblock %}
+    {% block css %}
+    {% endblock %}
 </head>
 <body>
 {#    头部#}
-<div class="container-full">
-    <div class="row top-nav" >
-        <div class="top-user ui text menu ol-lg-12 col-xd-12 col-sm-12 col-xs-12 ">
+<div class="container-fluid">
+    <div class="row top-nav">
+        <div class="top-user ui text menu col-lg-12 col-xd-12 col-sm-12 col-xs-12 ">
             <div class="ui left dropdown item">
                 <i class="icon big student"></i>
                 <span>李先生</span>
@@ -38,14 +41,19 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid">{% block content %}{% endblock %}</div>
+
+    {# 内容部分 #}
+
+    {# 底部导航 #}
     <div class="row">
-        {#    大屏幕#}
+        {# 大屏幕 #}
         <div class="col-lg-12 col-xd-12 hidden-sm hidden-xs">
             <div class="ui massive bottom fixed menu bottom-nav">
                 <div class="item">
                     <i class="large icon home"></i>
                 </div>
-                <a class="item"><i class="icon large flag outline"></i>决策中心</a>
+                <a class="item active"><i class="icon large flag outline"></i>决策中心</a>
                 <a class="item"><i class="icon large doctor"></i>专家点评</a>
                 <a class="item"><i class="icon large newspaper"></i>数据中心</a>
                 <a class="item"><i class="icon large toggle right"></i>快讯直播</a>
@@ -62,7 +70,7 @@
                 <div class="item">
                     <i class="large icon home"></i>
                 </div>
-                <a class="item"><i class="icon flag outline"></i>决策中心</a>
+                <a class="item active"><i class="icon flag outline"></i>决策中心</a>
                 <a class="item"><i class="icon doctor"></i>专家点评</a>
                 <a class="item"><i class="icon newspaper"></i>数据中心</a>
                 <a class="item"><i class="icon toggle right"></i>快讯直播</a>
@@ -81,6 +89,11 @@
     $('.ui.dropdown')
             .dropdown()
     ;
-
+    $(function () {
+        $('.change-button p').on('click', function () {
+            $('.change-button p').removeClass('active');
+            $(this).addClass('active')
+        })
+    })
 
 </script>
