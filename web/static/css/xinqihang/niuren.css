@@ -1,0 +1,75 @@
+.content-info {
+    margin-top: 15px;
+    height: 490px;
+    box-shadow: 2px 3px 3px -2px #333;
+    background: rgba(80, 104, 191, 0.5);
+}
+
+.border {
+    border: 1px solid;
+}
+
+.content-info .box {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+}
+
+.content-info .box .item {
+    height: 460px;
+    font-size: 14px;
+}
+
+.content-info .box .item .head {
+    height: 80px !important;
+    padding-top: 15px;
+    padding-left: 25%;
+}
+
+.content-info .box .item .head div {
+    float: left;
+}
+
+.content-info .box .item .head .user-name {
+    padding-top: 15px;
+    font-size: 18px;
+}
+
+.content-info .box .item .user-info {
+    height: 100px !important;
+    text-align: left;
+    padding: 0 30px 0 30px;
+}
+.content-info .box .item .user-info .star{
+white-space:nowrap;
+
+}
+.content-info .box .item .user-info .line {
+    margin-top: 10px;
+}
+
+.content-info .box .item .account-info {
+    padding-left: 30px;
+    background: #2a44c3;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content-info .box .item .account-info p {
+    margin-bottom: 10px;
+}
+
+.content-info .box .item .buttons {
+    padding:15px;
+}
+.content-info .box .item .buttons button{
+    height:44px;
+    width:48%;
+    font-size: 16px;
+}
+.content-info .box .item .buttons .info{
+    float: left;
+}
+.content-info .box .item .buttons .niuren{
+    float: right;
+}

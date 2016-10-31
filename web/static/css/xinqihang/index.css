@@ -61,14 +61,16 @@
     background: -ms-linear-gradient(top, rgba(21, 144, 218, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
     background: linear-gradient(to bottom, rgba(21, 144, 218, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
 }
+
 .left-icons .item-box.three .right-box {
-    background: -moz-linear-gradient(top, rgba(76 ,135 ,226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -moz-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(18%, rgba(21, 144, 218, 0.89)), color-stop(100%, rgba(17, 119, 210, 0.43)));
-    background: -webkit-linear-gradient(top, rgba(76 ,135 ,226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
-    background: -o-linear-gradient(top, rgba(76 ,135 ,226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
-    background: -ms-linear-gradient(top, rgba(76 ,135 ,226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
-    background: linear-gradient(to bottom, rgba(76 ,135 ,226, 0.89) 18%, rgba(62 ,111 ,220, 0.43) 100%);
+    background: -webkit-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -o-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -ms-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: linear-gradient(to bottom, rgba(76, 135, 226, 0.89) 18%, rgba(62, 111, 220, 0.43) 100%);
 }
+
 .left-icons .item-box .left-box.two {
     background: #00b7ee
 }
@@ -80,8 +82,12 @@
 .right-info {
     margin-top: 15px;
     height: 490px;
-        box-shadow: 2px 3px 3px -2px #333;
-
+    box-shadow: 2px 3px 3px -2px #333;
     background: rgba(80, 104, 191, 0.5);
 }
+#connect-service-modal .content{
 
+}
+#connect-service-modal .content .icon{
+    font-size: 40px;
+}

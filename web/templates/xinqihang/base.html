@@ -9,8 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/semantic.min.css' %}">
     <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
     <script src="{% static 'js/semantic.min.js' %}"></script>
-    {% block js %}
-    {% endblock %}
+
     {% block css %}
     {% endblock %}
 </head>
@@ -97,3 +96,5 @@
     })
 
 </script>
+{% block js %}
+{% endblock %}
