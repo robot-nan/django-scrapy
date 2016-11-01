@@ -1,0 +1,114 @@
+{% extends 'xinqihang/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/xinqihang/shuju.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timedropper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datedropper.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="row" style="height: 100%;">
+        <div class="content-info col-md-12  col-sm-12" style="padding-top: 30px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="title">今日重点关注</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="attention-name">
+                        <h2><i class="icon thumbs outline up"></i>EIA</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row items">
+                <div class="col-md-1 hidden-xs "></div>
+                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-6 item">
+                    <div class="box">
+                        <img src="{% static 'img/feedback_thanks.jpg' %}" alt="">
+                        <div class="action">
+                            <button class="ui inverted grey basic button info">美联储利率决议</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-6 item">
+                    <div class="box">
+                        <img src="{% static 'img/feedback_thanks.jpg' %}" alt="">
+                        <div class="action">
+                            <button class="ui inverted grey basic button info">非农数据</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-6 item">
+                    <div class="box">
+                        <img src="{% static 'img/feedback_thanks.jpg' %}" alt="">
+                        <div class="action">
+                            <button class="ui inverted grey basic button info">EIA</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-6 item">
+                    <div class="box">
+                        <img src="{% static 'img/feedback_thanks.jpg' %}" alt="">
+                        <div class="action">
+                            <button class="ui inverted grey basic button info">ADP</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-6 item">
+                    <div class="box">
+                        <img src="{% static 'img/feedback_thanks.jpg' %}" alt="">
+                        <div class="action">
+                            <button class="ui inverted grey basic button info pading-l-r-0">当周初请失业金人数</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-1 hidden-xs "></div>
+            </div>
+        </div>
+    </div>
+    <div class="ui base small modal" id="connect-service-modal">
+        {#        <i class="close icon"></i>#}
+        <div class="header">
+            <p>今日重点关注：EAI <span class="choose-date">请选择日期：<input type="text" class="input" id="pickdate"/></span>
+            </p>
+
+        </div>
+        <div class="content" style="text-align: center;font-size: 20px;">
+
+            <div class="content">
+                <p>数据预测： <span class="orange">利多</span></p>
+                <p>预测成功率：80%</p>
+                <p>预测分析：</p>
+                <p class="line-height-2">
+                    是老款的减肥楼上的返利卡阿里深刻的减肥了撒打开减肥老卡死的减肥老卡死的减肥考虑阿散井地方了空间阿萨德了罚款撒旦法离开圣诞节弗兰克收到了副科级苏打绿开房间啊苏打绿开房间苏打绿开房间阿里SD卡 放假了肯定撒就发来的刷卡积分了凯撒大家分了凯撒大家分老卡死的减肥了撒打开减肥了凯撒的房间拉克丝打飞机了撒打开减肥阿里SD卡减肥了撒的减肥了凯撒大家付了款撒旦法离开是打飞机
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/datedropper.min.js' %}"></script>
+    <script src="{% static 'js/timedropper.min.js' %}"></script>
+    <script>
+        $("#pickdate").dateDropper({
+            animate: false,
+            format: 'Y-m-d',
+            maxYear: '2020'
+        });
+        var content_info = $('.content-info');
+        content_info.on('click', '.info', function () {
+            $('#connect-service-modal').modal('show')
+        });
+        {#        $("#picktime").timeDropper({#}
+        {#            meridians: false,#}
+        {#            format: 'HH:mm'#}
+        {#        });#}
+        {#        var _hmt = _hmt || [];#}
+        {#        var hm = document.createElement("script");#}
+        {#        hm.src = "//hm.baidu.com/hm.js?cc58f09bfb6ccacac51c4e5d7787d7d0";#}
+        {#        var s = document.getElementsByTagName("script")[0];#}
+        {#        s.parentNode.insertBefore(hm, s);#}
+    </script>
+{% endblock %}
