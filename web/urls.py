@@ -13,4 +13,5 @@ urlpatterns = patterns('web.views',
                        url(r'^index/$', TemplateView.as_view(template_name='xinqihang/index.html'), name='caiku'),
                        url(r'^niuren/$', TemplateView.as_view(template_name='xinqihang/niuren.html'), name='caiku'),
                        url(r'^shuju/$', TemplateView.as_view(template_name='xinqihang/shuju.html'), name='caiku'),
+                       url(r'^zhibo/$', TemplateView.as_view(template_name='xinqihang/zhibo.html'), name='caiku'),
                        )

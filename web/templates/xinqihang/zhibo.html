@@ -1,0 +1,363 @@
+{% extends 'xinqihang/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/xinqihang/zhibo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timedropper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datedropper.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="row" style="height: 100%;">
+        <div class="col-md-8 left-box content-info">
+            <div class="row">
+                <div class="ui small pointing menu">
+                    <a class="item " data-tab="first">实时数据</a>
+                    <a class="item active" data-tab="second">财经日历</a>
+                    <div class="right menu">
+                        <div class="item">
+                            <div class="ui transparent icon input">
+                                <input type="text" id="pickdate" placeholder="选择日期">
+                                <i class="search link icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeing-data ui bottom attached tab " data-tab="first">
+                    <table class="ui celled striped table">
+                        <thead>
+                        <tr class="finance-table-title">
+                            <th>时间</th>
+                            <th>内容</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        <tr>
+                            <td><i class="file outline icon"></i>11:30</td>
+                            <td> package.json</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="finance-data ui bottom attached tab active" data-tab="second">
+                    <table class="ui celled striped table">
+                        <thead>
+                        <tr class="finance-table-title">
+                            <th>时间</th>
+                            <th class="text-center">国家</th>
+                            <th>指标</th>
+                            <th>前值</th>
+                            <th>预测值</th>
+                            <th>公布置</th>
+                            <th>重要性</th>
+                            <th>利多利空</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11:30</td>
+                            <td class="text-center"><i class="flag andorra"></i></td>
+                            <td>asdfdsfdsfasdfdsfaasdfkjsdhkfjhasdkfjh</td>
+                            <td>5.7</td>
+                            <td>55.2</td>
+                            <td>54.1</td>
+                            <td>
+
+                                <div class="stars">
+                                    <i class="icon star"></i>
+                                    <i class="icon empty star"></i>
+                                    <i class="icon empty star"></i>
+                                </div>
+                            </td>
+                            <td class="top-bottom">
+                                <p>
+                                    <span class="title-red">&nbsp;利多&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;金银&nbsp;</span>
+                                    <span class="title-red-info">&nbsp;澳元&nbsp;</span>
+                                </p>
+                                <p>
+                                    <span class="title-green">&nbsp;利空&nbsp;</span>
+                                    <span class="title-green-info">&nbsp;石油&nbsp;</span>
+                                </p>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 right-box content-info expert-info">
+            <p class="title">专家点评</p>
+            <div class="card no-margin-top">
+                <p class="small-title orange"><i class="icon pointing right"></i>港股-期指-沥青-铜</p>
+                <ul>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                </ul>
+            </div>
+            <div class="card">
+                <p class="small-title orange"><i class="icon pointing right"></i>港股-期指-沥青-铜</p>
+                <ul>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                </ul>
+            </div>
+            <div class="card border-bottom">
+                <p class="small-title orange"><i class="icon pointing right"></i>港股-期指-沥青-铜</p>
+                <ul>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                    <li>123123sss</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/datedropper.min.js' %}"></script>
+    <script src="{% static 'js/timedropper.min.js' %}"></script>
+    <script>
+        $("#pickdate").dateDropper({
+            animate: false,
+            format: 'Y-m-d',
+            maxYear: '2020'
+        });
+        var content_info = $('.content-info');
+        content_info.on('click', '.info', function () {
+            $('#connect-service-modal').modal('show')
+        });
+        $('.content-info .menu .item')
+                .tab()
+        ;
+
+    </script>
+{% endblock %}

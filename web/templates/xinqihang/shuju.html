@@ -71,12 +71,15 @@
     <div class="ui base small modal" id="connect-service-modal">
         {#        <i class="close icon"></i>#}
         <div class="header">
-            <p>今日重点关注：EAI <span class="choose-date">请选择日期：<input type="text" class="input" id="pickdate"/></span>
-            </p>
-
+            <span>今日重点关注：EAI</span>
+            <div class="choose-date">
+                <div class="ui mini icon input">
+                    <input type="text" id="pickdate" placeholder="选择日期..">
+                    <i class="search icon"></i>
+                </div>
+            </div>
         </div>
         <div class="content" style="text-align: center;font-size: 20px;">
-
             <div class="content">
                 <p>数据预测： <span class="orange">利多</span></p>
                 <p>预测成功率：80%</p>
