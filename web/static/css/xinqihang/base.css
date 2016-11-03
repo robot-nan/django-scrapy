@@ -24,7 +24,7 @@ body {
 
 .top-nav {
     background-color: white !important;
-
+    width: 100%;
 }
 
 .top-user {
@@ -97,9 +97,96 @@ body {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
-.no-margin-top{
-    margin-top:0 !important;
+
+.no-margin-top {
+    margin-top: 0 !important;
 }
-.text-center{
+
+.text-center {
     text-align: center !important;
+}
+
+.text-right {
+    text-align: right;
+}
+
+#account-edit tr td {
+    border: none;
+
+}
+
+#account-edit tr td:first-child {
+    text-align: right;
+}
+
+#account-edit tr td:last-child {
+    text-align: center;
+}
+
+#account-edit tr:last-child td {
+    text-align: right;
+}
+
+.menu.transition.visible .selected {
+    background: white !important;
+    color: #eee !important;
+    font-weight: 400 !important;
+}
+
+#menu .ui.menu .ui.dropdown .menu > .active.item {
+    background: white !important;
+    font-weight: normal !important;
+    color: #333 !important;
+}
+
+#disk-message {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#disk-message tr td:first-child, #disk-message tr td:nth-child(3) {
+    text-align: left;
+}
+
+#disk-message tr td span {
+    width: 110px;
+    display: inline-block;
+}
+
+#page:hover {
+    background: white !important;
+}
+
+#self-stock .search {
+    text-align: right;
+}
+
+#page .page ul li:hover {
+    background: rgba(0, 0, 0, .05) !important;
+    cursor: pointer;
+}
+
+.page {
+    text-align: right !important;
+}
+
+.page ul {
+    margin: 0;
+}
+
+.page ul li {
+    display: inline-block;
+    list-style: none;
+    border: 1px solid #dededf;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #2d2d2d;
+    padding: 2px 6px;
+}
+
+#send-issue textarea {
+    width: 100%;
+    margin-bottom: 12px;
+    resize: none;
+    border: 1px solid rgba(34, 36, 38, 0.15);
 }

@@ -16,25 +16,25 @@
 <body>
 {#    头部#}
 <div class="container-fluid">
-    <div class="row top-nav">
+    <div class="row top-nav ui sticky fixed top">
         <div class="top-user ui text menu col-lg-12 col-xd-12 col-sm-12 col-xs-12 ">
             <div class="ui left dropdown item">
                 <i class="icon big student"></i>
                 <span>李先生</span>
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                    <div class="item">我的资料 <i class="right icon child "></i></div>
-                    <div class="item">桌面通知<i class="right icon alarm green"></i></div>
-                    <div class="item">自选股<i class="right icon area chart red"></i></div>
+                    <div class="item account-edit">我的资料 <i class="right icon child "></i></div>
+                    <div class="item disk-message">桌面通知<i class="right icon alarm green"></i></div>
+                    <div class="item self-stock">自选股<i class="right icon area chart red"></i></div>
                     <div class="item">技术学堂<i class="right icon book"></i></div>
                 </div>
             </div>
             <div class="ui right dropdown item">About Us <i class="dropdown icon"></i>
                 <div class="menu">
                     <div class="item">关于我们</div>
-                    <div class="item">生命条款</div>
+                    <div class="item">声明条款</div>
                     <div class="item">联系我们</div>
-                    <div class="item">问题反馈</div>
+                    <div class="item send-issue">问题反馈</div>
 
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     <i class="large icon home"></i>
                 </div>
                 <a class="item active"><i class="icon flag outline"></i>决策中心</a>
-                <a class="item"><i class="icon doctor"></i>专家点评</a>
+                <a class="item disk"><i class="icon doctor"></i>专家点评</a>
                 <a class="item"><i class="icon newspaper"></i>数据中心</a>
                 <a class="item"><i class="icon toggle right"></i>快讯直播</a>
                 <a class="item"><i class="icon student"></i>牛人操盘</a>
@@ -82,19 +82,199 @@
         </div>
     </div>
 </div>
+<div class="ui small base modal" id="account-edit">
+    <div class="content">
+        <table class="ui celled table">
+            <tbody>
+            <tr>
+                <td>用户名：</td>
+                <td>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Search users...">
+                        <i class="users icon"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>用户身份：</td>
+                <td>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Search users...">
+                        <i class="users icon"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>联系电话：</td>
+                <td>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Search users...">
+                        <i class="users icon"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>QQ：</td>
+                <td>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Search users...">
+                        <i class="users icon"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button class="ui primary button">保存修改</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="ui small base modal" id="disk-message">
+    <div class="content">
+        <table class="ui celled table">
+            <tbody>
+            <tr>
+                <td><span>云情报：</span>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="example">
+                    </div>
+                </td>
+                <td><span>云数据：</span>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="example">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>数据中心：</span>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="example">
+                    </div>
+                </td>
+
+                <td><span>快讯直播：</span>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="example">
+                    </div>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="ui small base modal" id="self-stock">
+    <div class="content">
+        <div class="search">
+            <div class="ui small icon input">
+                <input type="text" placeholder="Search...">
+                <i class="circular search link icon"></i>
+            </div>
+        </div>
+
+        <table class="ui selectable celled table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>股票代码</th>
+                <th>选股时间</th>
+                <th>功能</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="warning">
+                <td>John</td>
+                <td>John</td>
+                <td>No Action</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <td>Jamie</td>
+                <td class="positive">Approved</td>
+                <td class="warning">Requires call</td>
+                <td class="warning">Requires call</td>
+            </tr>
+            <tr>
+                <td>Jill</td>
+                <td class="negative">Denied</td>
+                <td>None</td>
+                <td>None</td>
+            </tr>
+            <tr id="page">
+                <td class="page" colspan="4">
+                    <ul>
+                        <li>上一页</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>下一页</li>
+                    </ul>
+                    <div class="clear"></div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="ui small base modal" id="send-issue">
+    <div class="header">
+        问题反馈
+    </div>
+    <div class="content">
+        <textarea rows="5" cols="20" placeholder="请输入您要反馈的内容"></textarea>
+        <div class="text-right">
+
+        <button class="ui primary button">保存修改</button>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
 <script>
     $('.ui.dropdown')
-            .dropdown()
-    ;
+            .dropdown();
     $(function () {
         $('.change-button p').on('click', function () {
             $('.change-button p').removeClass('active');
             $(this).addClass('active')
         })
-    })
+    });
+    $('.account-edit').click(function () {
+        $('#account-edit').modal('show')
+    });
+    $('.disk-message').click(function () {
+        $('#disk-message').modal('show')
+    });
+    $('.self-stock').click(function () {
+        $('#self-stock').modal('show')
+    });
+    $('.send-issue').click(function () {
+        $('#send-issue').modal('show')
+    });
+    $('#send-issue').modal('show');
+    $('.top-user').on('click', '.menu .item', function () {
+        $(this).removeClass('active').removeClass('selected')
+    });
 
+
+    $('.ui.checkbox')
+            .checkbox({
+                onChecked: function () {
+                    $(this).addClass('selected')
+                },
+                onUnchecked: function () {
+                    $(this).removeClass('selected')
+                }
+            })
+    ;
 </script>
 {% block js %}
 {% endblock %}
