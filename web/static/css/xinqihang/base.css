@@ -24,7 +24,7 @@ body {
 
 .top-nav {
     background-color: white !important;
-    width: 100%;
+    width: 100% !important;
 }
 
 .top-user {
