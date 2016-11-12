@@ -61,6 +61,7 @@ body {
     box-shadow: -1px 1px 3px -1px black;
 }
 
+
 .bottom-nav .change-button p {
     /*box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);*/
     line-height: 32px;
@@ -189,4 +190,16 @@ body {
     margin-bottom: 12px;
     resize: none;
     border: 1px solid rgba(34, 36, 38, 0.15);
+}
+#search-stock .primary.button{
+    left:-3px;
+}
+#search-stock .content .action.input{
+    width:90%;
+}
+#search-stock .selection.dropdown{
+        width: 106px;
+}
+.orange{
+    color: orange;
 }

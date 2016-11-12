@@ -1,0 +1,140 @@
+{% extends 'xinqihang/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/xinqihang/decision.css' %}">
+
+{% endblock %}
+{% block content %}
+    <div class="row content-info">
+        <div class="col-md-7 left-info">
+            <div class="box">
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+                <p>123123123123</p>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="row right-top-box">
+                <div class="col-md-6 box">
+                    <div class="inner-box">
+                        <div class="ui horizontal divider">大数据诊断</div>
+                        <p>该股盈利能力:80%</p>
+                        <div class="today-advice">
+                            <div class="title">
+                                <p>今日</p>
+                                <p>操作</p>
+                                <p>建议</p>
+                            </div>
+                            <ul class="info">
+                                <li>2680附近做空</li>
+                                <li>2680附近做空</li>
+                                <li>2680附近做空</li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                        <p class="only">参考压力价格：100</p>
+                        <p class="only">预测明日买点：20</p>
+                        <p>短期趋势:</p>
+                        <p>中期趋势:</p>
+                        <p class="only orange-box">机构预测:</p>
+                    </div>
+                </div>
+                <div class="col-md-6 box ">
+                    <div class="inner-box">
+                        <div class="ui horizontal divider">专家点评</div>
+                        <div class="news-box">
+                            <div class="item">
+                                <p class="data">日期：2016-10-20</p>
+                                <p class="description">拉萨款到即发了撒地苏？</p>
+                            </div>
+                            <div class="item">
+                                <p class="data">日期：2016-10-20</p>
+                                <p class="description">拉萨款到即发了撒地苏？</p>
+                            </div>
+                            <div class="item">
+                                <p class="data">日期：2016-10-20</p>
+                                <p class="description">拉萨款到即发了撒地苏？</p>
+                            </div>
+                            <div class="item">
+                                <p class="data">日期：2016-10-20</p>
+                                <p class="description">拉萨款到即发了撒地苏？</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="niuren-box">
+                        <div class="left">
+                            <div class="title">
+                                <p>牛人预测</p>
+                                <i class="icon user"></i>
+                            </div>
+                            <div class="info">
+                                <div class="ui horizontal divider">目标价格</div>
+                                <p class="price">12.7元</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div id="pie-img" style="height: 119px"></div>
+                        </div>
+                        <div class="clear"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 add-stock">
+                    <a href="javascript:;"><i class="icon plus"></i>加入自选股</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/echarts_pie.min.js' %}"></script>
+    <script>
+        var app = echarts.init(document.getElementById('pie-img'));
+        option = {
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    hoverAnimation: false,
+                    radius: '100%',
+                    center: ['50%', '50%'],
+                    data: [
+                        {value: 335, name: '看空'},
+                        {value: 310, name: '看张'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        app.setOption(option);
+
+    </script>
+{% endblock %}

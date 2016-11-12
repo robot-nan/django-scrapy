@@ -1,0 +1,248 @@
+{% extends 'xinqihang/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/xinqihang/choose_stock.css' %}">
+
+{% endblock %}
+{% block content %}
+    <div class="row content-info">
+        <div class="col-md-8 left margin-bottom">
+            <div class="box">
+                <div class="title">
+                    <h2 class="ui horizontal divider header"> 云选股 </h2>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4">
+                        <div class="item">
+                            <p class="title">股票代码</p>
+                            <p class="code">000808</p>
+                            <p class="rate">成功率：50%</p>
+                            <div class="pie">
+                                <div id="pie-img-one" style="height: 150px"></div>
+                            </div>
+                            <div class="bottom-info">
+                                <p>
+                                    <span>建议买点：1000</span><br>
+                                    <span>建议止盈点：200000</span><br>
+                                </p>
+                                <p>
+                                    <span>建议操作周期：20天</span><br>
+                                    <span>建议止损点：2232.2</span><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="item">
+                            <p class="title">股票代码</p>
+                            <p class="code">000808</p>
+                            <p class="rate">成功率：50%</p>
+                            <div class="pie">
+                                <div id="pie-img-two" style="height: 150px"></div>
+                            </div>
+                            <div class="bottom-info">
+
+                                <p>
+                                    <span>建议买点：1000</span><br>
+                                    <span>建议止盈点：200000</span><br>
+                                </p>
+                                <p>
+                                    <span>建议操作周期：20天</span><br>
+                                    <span>建议止损点：2232.2</span><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="item">
+                            <p class="title">股票代码</p>
+                            <p class="code">000808</p>
+                            <p class="rate">成功率：50%</p>
+                            <div class="pie">
+                                <div id="pie-img-three" style="height: 150px"></div>
+                            </div>
+                            <div class="bottom-info">
+
+                                <p>
+                                    <span>建议买点：1000</span><br>
+                                    <span>建议止盈点：200000</span><br>
+                                </p>
+                                <p>
+                                    <span>建议操作周期：20天</span><br>
+                                    <span>建议止损点：2232.2</span><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="box">
+                <div class="row">
+                    <div class="col-md-12 yesterday-view">
+                        <div class="title">
+                            <h2 class="ui horizontal divider header"> 昨日回顾 </h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-6 text-center">
+                                <img src="{% static 'img/feedback_thanks.jpg' %}" width="112px" alt="">
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-6 left-info">
+                                <p>股票代码/600000</p>
+                                <p>建议买点:5000附近</p>
+                                <p>收益：5%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="box">
+                <div class="row">
+                    <div class="col-md-12 history-info">
+                        <div class="title">
+                            <h2 class="ui horizontal divider header"> 历史收益率 </h2>
+                        </div>
+                        <div class="line">
+                            <div class="info left">
+                                <p class="big">股票代码/600001</p>
+                                <p class="small">时间:2016-10-15 操作:5天 买点:2689附近</p>
+                            </div>
+                            <div class="right">
+                                 <p>收益<span>10%&nbsp;</span><i class="icon red long arrow up big"></i></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+<div class="line">
+                            <div class="info left">
+                                <p class="big">股票代码/600001</p>
+                                <p class="small">时间:2016-10-15 操作:5天 买点:2689附近</p>
+                            </div>
+                            <div class="right">
+                                 <p>收益<span>10%&nbsp;</span><i class="icon red long arrow up big"></i></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="line">
+                            <div class="info left">
+                                <p class="big">股票代码/600001</p>
+                                <p class="small">时间:2016-10-15 操作:5天 买点:2689附近</p>
+                            </div>
+                            <div class="right">
+                                 <p>收益<span>10%&nbsp;</span><i class="icon red long arrow up big"></i></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="line">
+                            <div class="info left">
+                                <p class="big">股票代码/600001</p>
+                                <p class="small">时间:2016-10-15 操作:5天 买点:2689附近</p>
+                            </div>
+                            <div class="right">
+                                <p>收益<span>10%&nbsp;</span><i class="icon red long arrow up big"></i></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/echarts_pie.min.js' %}"></script>
+
+    <script>
+        var app_one = echarts.init(document.getElementById('pie-img-one'));
+        var app_two = echarts.init(document.getElementById('pie-img-two'));
+        var app_three = echarts.init(document.getElementById('pie-img-three'));
+
+        option = {
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: ['60%', '100%'],
+                    hoverAnimation: false,
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    label: {
+                        normal: {
+                            position: 'center'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: [
+                        {
+                            value: 335, name: '操盘手法',
+                            label: {
+                                normal: {
+                                    textStyle: {
+                                        fontSize: 14
+                                    }
+                                }
+                            }
+
+                        },
+                        {
+                            value: 310, name: '中线操盘',
+                            tooltip: {
+                                show: false
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#999'
+
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    formatter: '\n中线操盘',
+                                    textStyle: {
+                                        fontSize: 16
+                                    }
+                                }
+                            }
+
+                        }
+
+                    ]
+                }
+            ]
+        };
+        option['series'][0]['data'][0]['value'] = 30;
+        option['series'][0]['data'][1]['value'] = 70;
+        app_one.setOption(option);
+        option['series'][0]['data'][0]['value'] = 0;
+        option['series'][0]['data'][1]['value'] = 100;
+        app_two.setOption(option);
+        option['series'][0]['data'][0]['value'] = 50;
+        option['series'][0]['data'][1]['value'] = 50;
+        app_three.setOption(option);
+
+        window.onresize = function () {
+            app_one.resize();
+            app_two.resize();
+            app_three.resize();
+        }
+{#        window.onresize = app_one.resize;#}
+{#        window.onresize = app_two.resize;#}
+{#        window.onresize = app_three.resize;#}
+    </script>
+
+
+{% endblock %}

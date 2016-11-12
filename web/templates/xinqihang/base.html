@@ -42,47 +42,49 @@
     </div>
     <div class="container-fluid">{% block content %}{% endblock %}</div>
 
-    {# 内容部分 #}
 
     {# 底部导航 #}
-    <div class="row">
-        {# 大屏幕 #}
-        <div class="col-lg-12 col-xd-12 hidden-sm hidden-xs">
-            <div class="ui massive bottom fixed menu bottom-nav">
-                <div class="item">
-                    <i class="large icon home"></i>
-                </div>
-                <a class="item active"><i class="icon large flag outline"></i>决策中心</a>
-                <a class="item"><i class="icon large doctor"></i>专家点评</a>
-                <a class="item"><i class="icon large newspaper"></i>数据中心</a>
-                <a class="item"><i class="icon large toggle right"></i>快讯直播</a>
-                <a class="item"><i class="icon large student"></i>牛人操盘</a>
-                <div class="change-button">
-                    <p class="active">期货</p>
-                    <p>股票</p>
+    <div class="container" id="bottom-menu">
+        <div class="row">
+            <div class=" col-xs-12 col-sm-12 col-md-12 future-menu menu-box">
+                <div class="ui huge bottom fixed menu bottom-nav">
+                    <div class="item">
+                        <i class="large icon home"></i>
+                    </div>
+                    <a class="item active"><i class="icon flag outline"></i>决策中心</a>
+                    <a class="item disk"><i class="icon doctor"></i>专家点评</a>
+                    <a class="item"><i class="icon newspaper"></i>数据中心</a>
+                    <a class="item"><i class="icon toggle right"></i>快讯直播</a>
+                    <a class="item"><i class="icon student"></i>牛人操盘</a>
+                    <div class="change-button">
+                        <p class="active" data-value=".future-menu">期货</p>
+                        <p data-value=".stock-menu">股票</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        {#    小屏幕#}
-        <div class=" col-xs-12 col-sm-12 hidden-xd hidden-lg">
-            <div class="ui huge bottom fixed menu bottom-nav">
-                <div class="item">
-                    <i class="large icon home"></i>
-                </div>
-                <a class="item active"><i class="icon flag outline"></i>决策中心</a>
-                <a class="item disk"><i class="icon doctor"></i>专家点评</a>
-                <a class="item"><i class="icon newspaper"></i>数据中心</a>
-                <a class="item"><i class="icon toggle right"></i>快讯直播</a>
-                <a class="item"><i class="icon student"></i>牛人操盘</a>
-                <div class="change-button">
-                    <p class="active">期货</p>
-                    <p>股票</p>
+            <div class=" col-xs-12 col-sm-12 col-md-12 stock-menu menu-box" hidden>
+                <div class="ui huge bottom fixed menu bottom-nav">
+                    <div class="item">
+                        <i class="large icon home"></i>
+                    </div>
+                    <a class="item active decision-cloud"><i class="icon flag outline"></i>云决策</a>
+                    <a class="item"><i class="icon doctor"></i>云诊断</a>
+                    <a class="item"><i class="icon newspaper"></i>云情报</a>
+                    <a class="item"><i class="icon toggle right"></i>云选股</a>
+                    <a class="item"><i class="icon student"></i>云数据</a>
+                    <div class="change-button">
+                        <p data-value=".future-menu">期货</p>
+                        <p class="active" data-value=".stock-menu">股票</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="ui small base modal" id="account-edit">
+    <div class="header">
+        我的资料
+    </div>
     <div class="content">
         <table class="ui celled table">
             <tbody>
@@ -168,6 +170,9 @@
     </div>
 </div>
 <div class="ui small base modal" id="self-stock">
+    <div class="header">
+        自选股
+    </div>
     <div class="content">
         <div class="search">
             <div class="ui small icon input">
@@ -222,7 +227,6 @@
         </table>
     </div>
 </div>
-
 <div class="ui small base modal" id="send-issue">
     <div class="header">
         问题反馈
@@ -231,22 +235,39 @@
         <textarea rows="5" cols="20" placeholder="请输入您要反馈的内容"></textarea>
         <div class="text-right">
 
-        <button class="ui primary button">保存修改</button>
+            <button class="ui primary button">保存修改</button>
         </div>
 
     </div>
 </div>
+
+<div class="ui small base modal" id="search-stock">
+    <div class="content text-center">
+        <div class="ui action input">
+            <input type="text" placeholder="输入您要搜索的产品代码 然后选择一个产品...">
+            <select class="ui compact selection dropdown">
+                <option value="">选择产品</option>
+                <option value="1">黄金</option>
+                <option value="0">白银</option>
+            </select>
+
+            <div type="submit" class="ui button">搜索</div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
 <script>
+    $('.container').on('click', '.change-button p', function () {
+        menu_ele = $(this).data('value');
+        console.log(menu_ele);
+        $('#bottom-menu').find('.menu-box').hide();
+        $(menu_ele).show()
+    });
     $('.ui.dropdown')
             .dropdown();
-    $(function () {
-        $('.change-button p').on('click', function () {
-            $('.change-button p').removeClass('active');
-            $(this).addClass('active')
-        })
-    });
     $('.account-edit').click(function () {
         $('#account-edit').modal('show')
     });
@@ -259,12 +280,15 @@
     $('.send-issue').click(function () {
         $('#send-issue').modal('show')
     });
-    $('#send-issue').modal('show');
     $('.top-user').on('click', '.menu .item', function () {
         $(this).removeClass('active').removeClass('selected')
     });
-
-
+    $('.decision-cloud').click(function () {
+        $('#search-stock').modal('show')
+    });
+    $('#search-stock').on('click', '.primary.button', function () {
+        $(this).find('i').attr('class', 'notched circle loading icon')
+    });
     $('.ui.checkbox')
             .checkbox({
                 onChecked: function () {
@@ -277,4 +301,5 @@
     ;
 </script>
 {% block js %}
+        <script src="{% static 'js/echarts_pie.min.js' %}"></script>
 {% endblock %}
