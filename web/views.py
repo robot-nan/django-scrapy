@@ -20,13 +20,13 @@ def gold_advice(request):
     item = []
     htmlparser = etree.HTMLParser()
     response = etree.parse(response, htmlparser)
-    advice = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[1]/td[2]/span/text()')
-    move_1 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[2]/td[2]/text()')
-    move_2 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[2]/td[3]/text()')
-    move_3 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[2]/td[4]/text()')
-    technology_1 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[3]/td[2]/text()')
-    technology_2 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[3]/td[3]/text()')
-    technology_3 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[3]/td[4]/text()')
+    advice = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[1]/td[2]/span/text')
+    move_1 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[2]/td[2]/text')
+    move_2 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[2]/td[3]/text')
+    move_3 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[2]/td[4]/text')
+    technology_1 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[3]/td[2]/text')
+    technology_2 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[3]/td[3]/text')
+    technology_3 = response.xpath('//*[@id="tech-analysis"]/div[3]/ul/li/table[1]/tbody/tr[3]/td[4]/text')
     for _index in range(8):
         tmp = {}
         tmp['composite_advice'] = advice[_index].strip()
@@ -175,6 +175,42 @@ def caiku(request, code):
         'prediction_price': prediction_price,
         'up': up,
         'down': down
+    }
+    return JsonResponse(content)
+
+
+def jqka(request, code):
+    url = 'http://doctor.10jqka.com.cn/' + code
+    res = requests.get(url)
+    soup = BeautifulSoup(res.content, 'html.parser')
+    score = soup.select_one('.bignum').text + '.' + soup.select_one('.smallnum').text
+    # print '分数', score
+    score_description = soup.select_one('.stocktotal').text
+    # print '分数 评论', score_description
+    short = soup.select_one('.short').text
+    mid = soup.select_one('.mid').text
+    long = soup.select_one('.long').text
+    # print '短期', short
+    # print '中期', mid
+    # print '长期', long
+    title = soup.select_one('.title').text.replace(u'更多连续上涨股票>>', '')
+    # print '标题', title
+    title_info = soup.select_one('.cnt').text
+    # print '标题内容', title_info
+    pressure = soup.select_one('#nav_technical > div > div.nx_items > div.box3.indexStat > div.hd2').text
+    muti = soup.select_one('#nav_technical > div > div.nx_items > div:nth-of-type(4) > div.hd2').text
+    # print '标题内容', pressure
+    # print '标题内容', muti
+    content = {
+        'score':score,
+        'score_description':score_description,
+        'short':short,
+        'mid':mid,
+        'long':long,
+        'title':title,
+        'title_info':title_info,
+        'pressure':pressure,
+        'muti':muti,
     }
     return JsonResponse(content)
 
