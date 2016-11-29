@@ -10,6 +10,7 @@ urlpatterns = patterns('web.views',
                        url(r'^stock_finance_sina/(?P<code>.*)/$', 'stock_finance_sina', name='stock finance sina'),
                        url(r'^caiku/(?P<code>.*)/$', 'caiku', name='caiku'),
                        url(r'^jqka/(?P<code>.*)/$', 'jqka', name='jqka'),
+                       url(r'^stock_price/(?P<code>.*)/$', 'stock_price', name='stock price'),
 
                        url(r'^index/$', TemplateView.as_view(template_name='xinqihang/index.html'), name='caiku'),
                        url(r'^niuren/$', TemplateView.as_view(template_name='xinqihang/niuren.html'), name='caiku'),

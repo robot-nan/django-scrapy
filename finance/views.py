@@ -50,3 +50,4 @@ def drag(request, code):
 def tomorrow_buy_point(request, code):
     ts = TushareStock(code)
     return JsonResponse(ts.tomorrow_buy_point(), safe=False)
+

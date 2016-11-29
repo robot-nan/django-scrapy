@@ -2,14 +2,12 @@
 import json
 import re
 
-import datetime
-import tushare as ts
 import urllib2
 import requests
+import tushare as ts
 from collections import OrderedDict
 from django.http import JsonResponse
 from bs4 import BeautifulSoup
-from django.shortcuts import render
 from django.utils import timezone
 from lxml import etree
 
@@ -179,6 +177,7 @@ def caiku(request, code):
     return JsonResponse(content)
 
 
+
 def jqka(request, code):
     url = 'http://doctor.10jqka.com.cn/' + code
     res = requests.get(url)
@@ -197,10 +196,12 @@ def jqka(request, code):
     # print '标题', title
     title_info = soup.select_one('.cnt').text
     # print '标题内容', title_info
+    yingyun = soup.select_one('#nav_basic > div > div.nx_items > div.box3.gsjy > div:nth-of-type(5) > div.hd2')
     pressure = soup.select_one('#nav_technical > div > div.nx_items > div.box3.indexStat > div.hd2').text
     muti = soup.select_one('#nav_technical > div > div.nx_items > div:nth-of-type(4) > div.hd2').text
     # print '标题内容', pressure
     # print '标题内容', muti
+
     content = {
         'score':score,
         'score_description':score_description,
@@ -211,9 +212,11 @@ def jqka(request, code):
         'title_info':title_info,
         'pressure':pressure,
         'muti':muti,
+        'yingyun':yingyun
     }
+
     return JsonResponse(content)
 
 
-if __name__ == '__main__':
-    pass
+def stock_price(request, code):
+    return JsonResponse({'data':ts.get_realtime_quotes(code).iloc[0].price})
