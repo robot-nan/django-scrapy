@@ -20,9 +20,8 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^get_json/', include('web.urls')),
-    url(r'^finance/', include('finance.urls')),
+                  url(r'^admin/', admin.site.urls),
+                  url(r'^get_json/', include('web.urls', namespace="get json")),
+                  url(r'^finance/', include('finance.urls', namespace="finance")),
 
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

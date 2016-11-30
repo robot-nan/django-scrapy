@@ -220,3 +220,18 @@ def jqka(request, code):
 
 def stock_price(request, code):
     return JsonResponse({'data':ts.get_realtime_quotes(code).iloc[0].price})
+
+
+def stock_open_height_amount(request,code):
+    context = {}
+    df = ts.get_realtime_quotes(code)  # Single stock symbol
+    context['name'] = df[['name']].iloc[0]['name']
+    context['price'] = df[['price']].iloc[0]['price']
+    # context['stock_zd'] = 0
+    context['open'] = df[['open']].iloc[0]['open']
+    # context['stock_yestoday_close'] =0
+    context['height'] = df[['high']].iloc[0]['high']
+    context['low'] = df[['low']].iloc[0]['low']
+    context['amount'] = df[['amount']].iloc[0]['amount']
+    context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
+    return JsonResponse(context)

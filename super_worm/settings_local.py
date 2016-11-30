@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'django_crontab',
     'gunicorn',
-    'web'
+    'web',
+    'finance'
 ]
 
 MIDDLEWARE_CLASSES = [

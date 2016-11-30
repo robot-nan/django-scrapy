@@ -9,23 +9,45 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 
 @xframe_options_exempt
 def get_k_day_data(request, code):
-    now_day = datetime.datetime.now()
-    last_day = now_day + datetime.timedelta(days=-1)
-    code = str(code)
-    res_day = ts.get_hist_data(code)
-    res_5 = ts.get_hist_data(code, ktype='5')
-    res_15 = ts.get_hist_data(code, ktype='15')
-    res_30 = ts.get_hist_data(code, ktype='30')
-    res_60 = ts.get_hist_data(code, ktype='60')
-    context = {
-        'day': res_day.to_json(orient='split'),
-        'min5': res_5.to_json(orient='split'),
-        'min15': res_15.to_json(orient='split'),
-        'min30': res_30.to_json(orient='split'),
-        'min60': res_60.to_json(orient='split'),
-    }
+    context = {}
+    df = ts.get_realtime_quotes('000581')  # Single stock symbol
+    context['name'] = df[['name']].iloc[0]['name']
+    context['price'] = df[['price']].iloc[0]['price']
+    # context['stock_zd'] = 0
+    context['open'] = df[['open']].iloc[0]['open']
+    # context['stock_yestoday_close'] =0
+    context['height'] = df[['high']].iloc[0]['high']
+    context['low'] = df[['low']].iloc[0]['low']
+    context['time'] = df[['date']].iloc[0]['date'] +'  '+ df[['time']].iloc[0]['time']
     return render(request, 'k_line.html', context)
 
+
+def get_k_ticks_data(request, code):
+    df = ts.get_today_ticks(code)
+    df.to_dict(orient='split')
+    context = {}
+    context['time'] = df.to_dict().get('time').values()
+    context['price'] = df.to_dict().get('price').values()
+    context['pchange'] = df.to_dict().get('pchange').values()
+    context['change'] = df.to_dict().get('change').values()
+    context['volume'] = df.to_dict().get('volume').values()
+    context['amount'] = df.to_dict().get('amount').values()
+    context['type'] = df.to_dict().get('type').values()
+    return JsonResponse(context)
+
+def stock_open_height_amount(request,code):
+    context = {}
+    df = ts.get_realtime_quotes('000581')  # Single stock symbol
+    context['name'] = df[['name']].iloc[0]['name']
+    context['price'] = df[['price']].iloc[0]['price']
+    # context['stock_zd'] = 0
+    context['open'] = df[['open']].iloc[0]['open']
+    # context['stock_yestoday_close'] =0
+    context['height'] = df[['high']].iloc[0]['high']
+    context['low'] = df[['low']].iloc[0]['low']
+    context['amount'] = df[['amount']].iloc[0]['amount']
+    context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
+    return JsonResponse(context)
 
 def today_buy_point(request, code):
     ts = TushareStock(code)
