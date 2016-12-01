@@ -24,3 +24,5 @@ urlpatterns = patterns('web.views',
                        url(r'^click/$', TemplateView.as_view(template_name='xinqihang/click.html'), name='click'),
                        url(r'^decision/$', TemplateView.as_view(template_name='xinqihang/decision.html'), name='decision'),
                        )
+
+
