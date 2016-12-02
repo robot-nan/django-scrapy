@@ -27,6 +27,8 @@ def get_k_day_data(request, code):
     context['height'] = df[['high']].iloc[0]['high']
     context['low'] = df[['low']].iloc[0]['low']
     context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
+    context['show'] = int(request.GET.get('show', 0))
+
     return render(request, 'k_line.html', context)
 
 
@@ -42,8 +44,6 @@ def get_k_ticks_data(request, code):
     context['volume'] = df.to_dict().get('volume').values()
     context['amount'] = df.to_dict().get('amount').values()
     context['type'] = df.to_dict().get('type').values()
-    print code
-    print timezone.now().strftime('%Y-%m-%d')
     for _index in StockPoint.objects.filter(code=code, date=timezone.now().strftime('%Y-%m-%d')):
         _type = _index.type
         context['point'].append(
