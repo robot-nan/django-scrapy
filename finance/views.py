@@ -21,7 +21,7 @@ def ticks(request, code):
     ts = TushareStock(code)
     context = ts.code_base_info()
     context['code'] = code
-    context['show'] = int(request.GET.get('show', 0))
+    context['show'] = int(request.GET.get('show', 1))
     return render(request, 'k_line.html', context)
 
 
@@ -61,8 +61,10 @@ def get_day_k_line(request, code):
     ts = TushareStock(code, type)
     context = ts.code_base_info()
     context['code'] = code
-    context['show'] = int(request.GET.get('show', 0))
+    context['type'] = type
+    context['show'] = int(request.GET.get('show', 1))
     context['data'] = json.dumps(ts.history_data[::-1].to_dict(orient='split')['data'][::-1])
+
     return render(request, 'day_k_line.html', context)
 
 
