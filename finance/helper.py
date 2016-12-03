@@ -7,9 +7,9 @@ TZ = pytz.timezone('Asia/Shanghai')
 
 
 class TushareStock(object):
-    def __init__(self, code='600848'):
+    def __init__(self, code='600848', type='D'):
         self.code = code
-        self.history_data = tushare.get_hist_data(code=code)
+        self.history_data = tushare.get_k_data(code=code,ktype=type)
 
     def yesterday_formart(self):
         # 要判断是否过了3点
@@ -67,14 +67,14 @@ class TushareStock(object):
         # 昨测今日买点：1日前的((开盘价+最高价+最低价)/3*2*(4-1))/(4+1)+((最高价+最低价)/2-3日前的(开盘价+最高价+最低价)/3）/4
         return ''
 
+    def code_base_info(self):
+        context = {}
+        df = tushare.get_realtime_quotes('000581')  # Single stock symbol
+        context['name'] = df[['name']].iloc[0]['name']
+        context['price'] = df[['price']].iloc[0]['price']
+        context['open'] = df[['open']].iloc[0]['open']
+        context['height'] = df[['high']].iloc[0]['high']
+        context['low'] = df[['low']].iloc[0]['low']
+        context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
+        return context
 
-if __name__ == '__main__':
-    ts = TushareStock()
-    # print ts.yesterday_open_price()
-    # print ts.yesterday_high_price()
-    # print ts.yesterday_low_price()
-    # print ts.today_buy_point()
-    # print ts.stop_loss()
-    # print ts.stop_make_money()
-    # print ts.drag()
-    print ts.tomorrow_buy_point()

@@ -3,8 +3,9 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('finance.views',
-                       url(r'^k_line/stock/(?P<code>.*)/$', 'get_k_day_data', name='k line stock'),
+                       url(r'^k_line/stock/(?P<code>.*)/$', 'ticks', name='ticks'),
                        url(r'^get_k_ticks_data/(?P<code>.*)/$', 'get_k_ticks_data', name='get k ticks data'),
+                       url(r'^day_k_line/(?P<code>.*)/$', 'get_day_k_line', name='day k line'),
 
                        url(r'^set_point/chinayunju/112233/$', 'set_point', name='set point'),
 

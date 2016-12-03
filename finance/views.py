@@ -1,5 +1,7 @@
 # coding:utf-8
 import datetime
+import json
+
 import tushare as ts
 from django.forms import model_to_dict
 from django.http import JsonResponse
@@ -15,20 +17,11 @@ from finance.models import StockPoint
 
 
 @xframe_options_exempt
-def get_k_day_data(request, code):
-    context = {}
-    df = ts.get_realtime_quotes('000581')  # Single stock symbol
+def ticks(request, code):
+    ts = TushareStock(code)
+    context = ts.code_base_info()
     context['code'] = code
-    context['name'] = df[['name']].iloc[0]['name']
-    context['price'] = df[['price']].iloc[0]['price']
-    # context['stock_zd'] = 0
-    context['open'] = df[['open']].iloc[0]['open']
-    # context['stock_yestoday_close'] =0
-    context['height'] = df[['high']].iloc[0]['high']
-    context['low'] = df[['low']].iloc[0]['low']
-    context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
     context['show'] = int(request.GET.get('show', 0))
-
     return render(request, 'k_line.html', context)
 
 
@@ -55,8 +48,22 @@ def get_k_ticks_data(request, code):
                 }
             }
         )
-    print context['point']
     return JsonResponse(context)
+
+
+def get_day_k_line(request, code):
+    """
+    D=日k线 W=周 M=月
+    5=5分钟 15=15分钟
+    30=30分钟 60=60分钟
+    """
+    type = request.GET.get('type', 'D')
+    ts = TushareStock(code, type)
+    context = ts.code_base_info()
+    context['code'] = code
+    context['show'] = int(request.GET.get('show', 0))
+    context['data'] = json.dumps(ts.history_data[::-1].to_dict(orient='split')['data'][::-1])
+    return render(request, 'day_k_line.html', context)
 
 
 def stock_open_height_amount(request, code):
