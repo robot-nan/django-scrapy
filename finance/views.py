@@ -2,17 +2,17 @@
 import datetime
 import json
 
+import pandas
 import tushare as ts
 from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+from pandas.tseries.offsets import BDay
 
 from finance.helper import TushareStock
 from django.views.decorators.clickjacking import xframe_options_exempt
-
+from datetime import datetime, timedelta
 from finance.models import StockPoint
 
 
@@ -23,17 +23,21 @@ def ticks(request, code):
     context['code'] = code
     context['show'] = int(request.GET.get('show', 1))
     context['height'] = request.GET.get('height','414')
+    context['show_point'] = request.GET.get('show_point', '0')
     return render(request, 'k_line.html', context)
 
 @xframe_options_exempt
 def get_k_ticks_data(request, code):
-    df = ts.get_today_ticks(code)
-    df.to_dict(orient='split')
+    try:
+        df = ts.get_today_ticks(code)
+    except:
+        today = pandas.datetime.today()
+        df = ts.get_tick_data(code, date=(today - BDay(1)).strftime('%Y-%m-%d'))
     context = {}
     context['point'] = []
     context['time'] = df.to_dict().get('time').values()
     context['price'] = df.to_dict().get('price').values()
-    context['pchange'] = df.to_dict().get('pchange').values()
+    context['pchange'] = df.to_dict().get('pchange',{}).values()
     context['change'] = df.to_dict().get('change').values()
     context['volume'] = df.to_dict().get('volume').values()
     context['amount'] = df.to_dict().get('amount').values()
