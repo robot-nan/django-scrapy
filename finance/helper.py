@@ -69,7 +69,7 @@ class TushareStock(object):
 
     def code_base_info(self):
         context = {}
-        df = tushare.get_realtime_quotes('000581')  # Single stock symbol
+        df = tushare.get_realtime_quotes(self.code)  # Single stock symbol
         context['name'] = df[['name']].iloc[0]['name']
         context['price'] = df[['price']].iloc[0]['price']
         context['open'] = df[['open']].iloc[0]['open']

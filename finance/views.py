@@ -22,6 +22,7 @@ def ticks(request, code):
     context = ts.code_base_info()
     context['code'] = code
     context['show'] = int(request.GET.get('show', 1))
+    context['height'] = request.GET.get('height','414')
     return render(request, 'k_line.html', context)
 
 @xframe_options_exempt
@@ -64,13 +65,13 @@ def get_day_k_line(request, code):
     context['type'] = type
     context['show'] = int(request.GET.get('show', 1))
     context['data'] = json.dumps(ts.history_data[::-1].to_dict(orient='split')['data'][::-1])
-
+    context['height'] = request.GET.get('height','414')
     return render(request, 'day_k_line.html', context)
 
 
 def stock_open_height_amount(request, code):
     context = {}
-    df = ts.get_realtime_quotes('000581')  # Single stock symbol
+    df = ts.get_realtime_quotes(code)  # Single stock symbol
     context['name'] = df[['name']].iloc[0]['name']
     context['price'] = df[['price']].iloc[0]['price']
     # context['stock_zd'] = 0
