@@ -24,7 +24,7 @@ def ticks(request, code):
     context['show'] = int(request.GET.get('show', 1))
     return render(request, 'k_line.html', context)
 
-
+@xframe_options_exempt
 def get_k_ticks_data(request, code):
     df = ts.get_today_ticks(code)
     df.to_dict(orient='split')
@@ -50,7 +50,7 @@ def get_k_ticks_data(request, code):
         )
     return JsonResponse(context)
 
-
+@xframe_options_exempt
 def get_day_k_line(request, code):
     """
     D=日k线 W=周 M=月
