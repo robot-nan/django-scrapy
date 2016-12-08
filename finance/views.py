@@ -24,6 +24,9 @@ def ticks(request, code):
     context['show'] = int(request.GET.get('show', 1))
     context['height'] = request.GET.get('height','414')
     context['show_point'] = request.GET.get('show_point', '0')
+    context['start'] = request.GET.get('start', 50)
+    context['end'] = request.GET.get('end', 100)
+
     return render(request, 'k_line.html', context)
 
 @xframe_options_exempt
@@ -67,6 +70,8 @@ def get_day_k_line(request, code):
     context = ts.code_base_info()
     context['code'] = code
     context['type'] = type
+    context['start'] = request.GET.get('start', 50)
+    context['end'] = request.GET.get('end', 100)
     context['show'] = int(request.GET.get('show', 1))
     context['data'] = json.dumps(ts.history_data[::-1].to_dict(orient='split')['data'][::-1])
     context['height'] = request.GET.get('height','414')

@@ -196,7 +196,7 @@ def jqka(request, code):
     # print '标题', title
     title_info = soup.select_one('.cnt').text
     # print '标题内容', title_info
-    yingyun = soup.select_one('#nav_basic > div > div.nx_items > div.box3.gsjy > div:nth-of-type(5) > div.hd2')
+    yingyun = soup.select_one('.bd.indexStat .hd2').text
     print yingyun
     pressure = soup.select_one('#nav_technical > div > div.nx_items > div.box3.indexStat > div.hd2').text
     muti = soup.select_one('#nav_technical > div > div.nx_items > div:nth-of-type(4) > div.hd2').text

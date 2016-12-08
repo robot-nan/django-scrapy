@@ -27,15 +27,15 @@ class TushareStock(object):
 
     def yesterday_open_price(self):
         # 昨日开盘价
-        return self.history_data.head(1).iloc[0]['open']
+        return self.history_data.tail(2).head(1).iloc[0]['open']
 
     def yesterday_high_price(self):
         # 昨日最高价
-        return self.history_data.head(1).iloc[0]['high']
+        return self.history_data.tail(2).head(1).iloc[0]['high']
 
     def yesterday_low_price(self):
         # 昨日最低价
-        return self.history_data.head(1).iloc[0]['low']
+        return self.history_data.tail(2).head(1).iloc[0]['low']
 
     def today_buy_point(self):
         # 今日买点 :昨日 ((开盘价 + 最高价 + 最低价) / 3 * 2 * (3 - 1)) / (3 + 1)
@@ -51,7 +51,7 @@ class TushareStock(object):
 
     def stop_make_money(self):
         # 止盈价：昨天的最高价*0.95
-        return self.history_data.head(1).high.values[0]
+        return self.history_data.tail(2).head(1).high.values[0]
 
     def drag(self):
         # 阻力价：不包括当天 有开盘的 交易日的  19日内最高价的最高值
