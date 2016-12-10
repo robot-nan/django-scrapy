@@ -12,6 +12,7 @@ urlpatterns = patterns('web.views',
                        url(r'^jqka/(?P<code>.*)/$', 'jqka', name='jqka'),
                        url(r'^stock_price/(?P<code>.*)/$', 'stock_price', name='stock price'),
                        url(r'^stock_open_height_amount/(?P<code>.*)/$', 'stock_open_height_amount', name='stock open height amount'),
+                       url(r'^stock_today_ditail/(?P<code>.*)/$', 'stock_today_ditail', name='stock today ditail'),
 
                        url(r'^index/$', TemplateView.as_view(template_name='xinqihang/index.html'), name='caiku'),
                        url(r'^niuren/$', TemplateView.as_view(template_name='xinqihang/niuren.html'), name='caiku'),

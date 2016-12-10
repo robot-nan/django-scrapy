@@ -235,3 +235,33 @@ def stock_open_height_amount(request,code):
     context['amount'] = df[['amount']].iloc[0]['amount']
     context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
     return JsonResponse(context)
+
+
+def stock_today_ditail(request,code):
+    """
+    name，股票名字
+    open，今日开盘价
+    pre_close，昨日收盘价
+    price，当前价格
+    high，今日最高价
+    low，今日最低价，竞买价，即“买一”报价
+    ask，竞卖价，即“卖一”报价
+    volume，成交量 maybe you need do volume/100
+    amount，成交金额（元 CNY）
+    date，日期；
+    time，时间；
+    """
+    context = {}
+    df = ts.get_realtime_quotes(code)
+    context['name'] = df.iloc[0]['name']
+    context['open'] = df.iloc[0]['open']
+    context['pre_close'] = df.iloc[0]['pre_close']
+    context['price'] = df.iloc[0]['price']
+    context['high'] = df.iloc[0]['high']
+    context['low'] = df.iloc[0]['low']
+    context['ask'] = df.iloc[0]['ask']
+    context['volume'] = df.iloc[0]['volume']
+    context['amount'] = df.iloc[0]['amount']
+    context['time'] = df.iloc[0]['amount']
+    context['date'] = df.iloc[0]['amount']
+    return JsonResponse(context)
