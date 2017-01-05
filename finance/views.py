@@ -33,7 +33,7 @@ def ticks(request, code):
 def get_k_ticks_data(request, code):
     try:
         df = ts.get_today_ticks(code)
-    except:
+    except UnboundLocalError:
         today = pandas.datetime.today()
         df = ts.get_tick_data(code, date=(today - BDay(1)).strftime('%Y-%m-%d'))
     context = {}
