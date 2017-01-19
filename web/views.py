@@ -1,5 +1,6 @@
 # coding:utf-8
 import json
+import random
 import re
 
 import urllib2
@@ -10,6 +11,8 @@ from django.http import JsonResponse
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from lxml import etree
+from user_agents import USER_AGENTS
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36"
 
 
 def gold_advice(request):
@@ -163,8 +166,13 @@ def stock_finance_sina(request, code):
 
 
 def caiku(request, code):
+    code = '600000'
     url = 'http://www.caiku.com/stock/' + code + '/pick.html'
-    res = requests.get(url)
+    headers = {
+        "User-Agent":random.choice(USER_AGENTS)
+    }
+    res = requests.get(url, headers=headers)
+
     soup = BeautifulSoup(res.content, 'html.parser')
     prediction_price = soup.select('.st_dt_ri_btm table .tal')[1].text.replace(u'元', '')
     up = soup.select('.yl')[0].text.split()[-1]
@@ -175,7 +183,6 @@ def caiku(request, code):
         'down': down
     }
     return JsonResponse(content)
-
 
 
 def jqka(request, code):
@@ -203,26 +210,26 @@ def jqka(request, code):
     # print '标题内容', muti
 
     content = {
-        'score':score,
-        'score_description':score_description,
-        'short':short,
-        'mid':mid,
-        'long':long,
-        'title':title,
-        'title_info':title_info,
-        'pressure':pressure,
-        'muti':muti,
-        'yingyun':yingyun
+        'score': score,
+        'score_description': score_description,
+        'short': short,
+        'mid': mid,
+        'long': long,
+        'title': title,
+        'title_info': title_info,
+        'pressure': pressure,
+        'muti': muti,
+        'yingyun': yingyun
     }
 
     return JsonResponse(content)
 
 
 def stock_price(request, code):
-    return JsonResponse({'data':ts.get_realtime_quotes(code).iloc[0].price})
+    return JsonResponse({'data': ts.get_realtime_quotes(code).iloc[0].price})
 
 
-def stock_open_height_amount(request,code):
+def stock_open_height_amount(request, code):
     context = {}
     df = ts.get_realtime_quotes(code)  # Single stock symbol
     context['name'] = df[['name']].iloc[0]['name']
@@ -237,7 +244,7 @@ def stock_open_height_amount(request,code):
     return JsonResponse(context)
 
 
-def stock_today_ditail(request,code):
+def stock_today_ditail(request, code):
     """
     name，股票名字
     open，今日开盘价

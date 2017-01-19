@@ -52,7 +52,7 @@ def get_k_ticks_data(request, code):
                 'name': u'卖' if _type == 'sell' else u'买',
                 'coord': [_index.time, _index.price],
                 'itemStyle': {
-                    'normal': {'color': 'red' if _type == 'sell' else 'green'}
+                'normal': {'color': 'red' if _type == 'sell' else 'green'}
                 }
             }
         )
