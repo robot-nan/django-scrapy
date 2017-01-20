@@ -81,7 +81,9 @@ def get_investing(request):
         ('wheat', []),
     ))
     for _num in xrange(0, 11 + 1):
+        #todo： 结构变了 需要重新调整
         info_soup = soup.find_all(attrs={'id': 'pair_{num}'.format(num=_num)})
+
         res_soup = soup.find_all(attrs={'class': 'movingAveragesTbl'})
         for _value, _res, _key in zip(info_soup, res_soup, data):
             _tmp = _res.find_all('td')[:-1]
@@ -272,3 +274,5 @@ def stock_today_ditail(request, code):
     context['time'] = df.iloc[0]['amount']
     context['date'] = df.iloc[0]['amount']
     return JsonResponse(context)
+
+get_investing(123)

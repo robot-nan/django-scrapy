@@ -25,6 +25,12 @@ SECRET_KEY = '94(%%3un8vtf3=u-b3gm%0r!!h3(j#e01rfmo#b$+=bg6w3o#('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+MONGO_HOST = 'dds-m5ea0fc94e106de42.mongodb.rds.aliyuncs.com'
+MONGO_PORT = 3717
+MONGO_DATABASE = 'finance'
+MONGO_USERNAME = 'root'
+MONGO_PASSWORD = '1234qwer'
+
 ALLOWED_HOSTS = []
 COMPRESS_ENABLED = True
 # Application definition
