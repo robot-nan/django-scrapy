@@ -89,7 +89,9 @@ def london_silver():
         try:
             res = requests.get(url)
             data = res.json()['data'][0]
-            LondonSilver(
+            LondonSilver.objects(
+                updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S')
+            ).update_one(
                 type=data['type'],
                 price=float(data['price']),
                 changepercent=data['changepercent'],
@@ -101,8 +103,8 @@ def london_silver():
                 amplitude=float(data['amplitude']),
                 buyprice=float(data['buyprice']),
                 sellprice=float(data['sellprice']),
-                updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
-            ).save()
+                upsert=True
+            )
             time.sleep(3)
         except:
             print traceback.format_exc()
@@ -135,7 +137,9 @@ def london_gold():
         try:
             res = requests.get(url)
             data = res.json()['data'][0]
-            LondonGold(
+            LondonGold.objects(
+                updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S')
+            ).update_one(
                 type=data['type'],
                 price=float(data['price']),
                 changepercent=data['changepercent'],
@@ -147,8 +151,8 @@ def london_gold():
                 amplitude=float(data['amplitude']),
                 buyprice=float(data['buyprice']),
                 sellprice=float(data['sellprice']),
-                updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
-            ).save()
+                upsert=True
+            )
             time.sleep(3)
         except:
             print traceback.format_exc()
