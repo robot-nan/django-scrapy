@@ -1,6 +1,8 @@
 # coding: utf-8
 
 import random
+import traceback
+
 import requests
 import json
 
@@ -84,23 +86,26 @@ def london_silver():
     """
     url = 'http://api.chinadatapay.com/financial/commodity/191/5?key={key}'.format(key=settings.SHUJUBAO_SILVER_KEY)
     for _time in xrange(20):
-        res = requests.get(url)
-        data = res.json()['data'][0]
-        LondonSilver(
-            type=data['type'],
-            price=float(data['price']),
-            changepercent=data['changepercent'],
-            changequantity=float(data['changequantity']),
-            openingprice=float(data['openingprice']),
-            maxprice=float(data['maxprice']),
-            minprice=float(data.get('minprice', 0.0)),
-            lastclosingprice=float(data['lastclosingprice']),
-            amplitude=float(data['amplitude']),
-            buyprice=float(data['buyprice']),
-            sellprice=float(data['sellprice']),
-            updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
-        ).save()
-        time.sleep(3)
+        try:
+            res = requests.get(url)
+            data = res.json()['data'][0]
+            LondonSilver(
+                type=data['type'],
+                price=float(data['price']),
+                changepercent=data['changepercent'],
+                changequantity=float(data['changequantity']),
+                openingprice=float(data['openingprice']),
+                maxprice=float(data['maxprice']),
+                minprice=float(data.get('minprice', 0.0)),
+                lastclosingprice=float(data['lastclosingprice']),
+                amplitude=float(data['amplitude']),
+                buyprice=float(data['buyprice']),
+                sellprice=float(data['sellprice']),
+                updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
+            ).save()
+            time.sleep(3)
+        except:
+            print traceback.format_exc()
 
 
 def london_gold():
@@ -127,20 +132,23 @@ def london_gold():
     """
     url = 'http://api.chinadatapay.com/financial/commodity/170/5?key={key}'.format(key=settings.SHUJUBAO_GOLD_KEY)
     for _time in xrange(20):
-        res = requests.get(url)
-        data = res.json()['data'][0]
-        LondonGold(
-            type=data['type'],
-            price=float(data['price']),
-            changepercent=data['changepercent'],
-            changequantity=float(data['changequantity']),
-            openingprice=float(data['openingprice']),
-            maxprice=float(data['maxprice']),
-            minprice=float(data.get('minprice', 0.0)),
-            lastclosingprice=float(data['lastclosingprice']),
-            amplitude=float(data['amplitude']),
-            buyprice=float(data['buyprice']),
-            sellprice=float(data['sellprice']),
-            updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
-        ).save()
-        time.sleep(3)
+        try:
+            res = requests.get(url)
+            data = res.json()['data'][0]
+            LondonGold(
+                type=data['type'],
+                price=float(data['price']),
+                changepercent=data['changepercent'],
+                changequantity=float(data['changequantity']),
+                openingprice=float(data['openingprice']),
+                maxprice=float(data['maxprice']),
+                minprice=float(data.get('minprice', 0.0)),
+                lastclosingprice=float(data['lastclosingprice']),
+                amplitude=float(data['amplitude']),
+                buyprice=float(data['buyprice']),
+                sellprice=float(data['sellprice']),
+                updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
+            ).save()
+            time.sleep(3)
+        except:
+            print traceback.format_exc()
