@@ -30,7 +30,7 @@ DEBUG = True
 MONGO_HOST = 'dds-m5ea0fc94e106de42.mongodb.rds.aliyuncs.com'
 MONGO_PORT = 3717
 MONGO_DATABASE = 'finance'
-MONGO_USERNAME = 'robot'
+MONGO_USERNAME = 'root'
 MONGO_PASSWORD = '1234qwer'
 
 ALLOWED_HOSTS = []

@@ -85,7 +85,6 @@ def london_silver():
     url = 'http://api.chinadatapay.com/financial/commodity/191/5?key={key}'.format(key=settings.SHUJUBAO_SILVER_KEY)
     for _time in xrange(20):
         res = requests.get(url)
-        print res.json()
         data = res.json()['data'][0]
         LondonSilver(
             type=data['type'],
