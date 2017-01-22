@@ -168,7 +168,6 @@ def stock_finance_sina(request, code):
 
 
 def caiku(request, code):
-    code = '600000'
     url = 'http://www.caiku.com/stock/' + code + '/pick.html'
     headers = {
         "User-Agent":random.choice(USER_AGENTS)
@@ -275,4 +274,3 @@ def stock_today_ditail(request, code):
     context['date'] = df.iloc[0]['amount']
     return JsonResponse(context)
 
-get_investing(123)

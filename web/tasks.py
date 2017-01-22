@@ -3,9 +3,15 @@
 import random
 import requests
 import json
+
+import time
 from bs4 import BeautifulSoup
 from django.utils import timezone
+
+from web.doc import LondonGold, LondonSilver
+from web.helper import make_aware_timezone
 from web.models import Yuncaijing, Guzhang
+from django.conf import settings
 
 
 def get_yuncaijing_insider():
@@ -59,3 +65,83 @@ def get_guzhang():
             Guzhang.objects.update_or_create(news_id=news_id, defaults=q)
     except Exception as e:
         print u'error --- %s --- Time:%s' % (e, timezone.localtime(timezone.now()).strftime('%F %R'))
+
+
+def london_silver():
+    """
+        "lastclosingprice":"16.98",
+        "price":"17.07",
+        "updatetime":"2017-01-21 5:49:00",
+        "buyprice":"17.08",
+        "openingprice":"16.99",
+        "changequantity":"0.088",
+        "minprice":"16.80",
+        "sellprice":"17.07",
+        "maxprice":"17.15",
+        "type":"白银美元",
+        "changepercent":"0.47%",
+        "amplitude":"2.10"
+    """
+    url = 'http://api.chinadatapay.com/financial/commodity/191/5?key={key}'.format(key=settings.SHUJUBAO_SILVER_KEY)
+    for _time in xrange(20):
+        res = requests.get(url)
+        print res.json()
+        data = res.json()['data'][0]
+        LondonSilver(
+            type=data['type'],
+            price=float(data['price']),
+            changepercent=data['changepercent'],
+            changequantity=float(data['changequantity']),
+            openingprice=float(data['openingprice']),
+            maxprice=float(data['maxprice']),
+            minprice=float(data.get('minprice', 0.0)),
+            lastclosingprice=float(data['lastclosingprice']),
+            amplitude=float(data['amplitude']),
+            buyprice=float(data['buyprice']),
+            sellprice=float(data['sellprice']),
+            updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
+        ).save()
+        time.sleep(3)
+
+
+def london_gold():
+    """
+    {
+        "code": "10000",
+        "message": "成功",
+        "data": [
+            {
+                "lastclosingprice": "1203.36",
+                "price": "1201.91",
+                "updatetime": "2017-01-20 22:53:00",
+                "buyprice": "1202.09",
+                "openingprice": "1203.60",
+                "changequantity": "-1.45",
+                "sellprice": "1201.91",
+                "maxprice": "1209.07",
+                "type": "黄金美元",
+                "changepercent": "-0.14%",
+                "amplitude": ".90"
+            }
+        ]
+    }
+    """
+    url = 'http://api.chinadatapay.com/financial/commodity/170/5?key={key}'.format(key=settings.SHUJUBAO_GOLD_KEY)
+    for _time in xrange(20):
+        res = requests.get(url)
+        data = res.json()['data'][0]
+        LondonGold(
+            type=data['type'],
+            price=float(data['price']),
+            changepercent=data['changepercent'],
+            changequantity=float(data['changequantity']),
+            openingprice=float(data['openingprice']),
+            maxprice=float(data['maxprice']),
+            minprice=float(data.get('minprice', 0.0)),
+            lastclosingprice=float(data['lastclosingprice']),
+            amplitude=float(data['amplitude']),
+            buyprice=float(data['buyprice']),
+            sellprice=float(data['sellprice']),
+            updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S'),
+        ).save()
+        time.sleep(3)

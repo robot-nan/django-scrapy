@@ -28,7 +28,8 @@ codecs.register(lambda name: codecs.lookup('utf8') if name == 'utf8mb4' else Non
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '94(%%3un8vtf3=u-b3gm%0r!!h3(j#e01rfmo#b$+=bg6w3o#('
-
+SHUJUBAO_GOLD_KEY = 'ce42c2c5418a5cb266657b25f9067965'
+SHUJUBAO_SILVER_KEY = '12916b979f23b5f51b997c9f1d0c1da4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -137,6 +138,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+MONGO_HOST = '127.0.0.1'
+MONGO_PORT = 27017
+MONGO_DATABASE = 'test'
+MONGO_USERNAME = ''
+MONGO_PASSWORD = ''
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 #
