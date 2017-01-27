@@ -25,9 +25,9 @@ class LondonGold(Document):
     updatetime	        string	    否	    更新时间
     """
 
-    type = StringField(max_length=32)
+    name = StringField(max_length=32)
     price = FloatField()
-    changepercent = StringField(max_length=200)
+    changepercent = StringField(max_length=32)
     changequantity = FloatField()
     openingprice = FloatField()
     maxprice = FloatField()
@@ -62,9 +62,9 @@ class LondonSilver(Document):
         ]
     }
     """
-    type = StringField(max_length=32)
+    name = StringField(max_length=32)
     price = FloatField()
-    changepercent = StringField(max_length=200)
+    changepercent = StringField(max_length=32)
     changequantity = FloatField()
     openingprice = FloatField()
     maxprice = FloatField()
@@ -74,4 +74,3 @@ class LondonSilver(Document):
     buyprice = FloatField()
     sellprice = FloatField()
     updatetime = DateTimeField()
-

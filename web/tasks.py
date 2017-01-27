@@ -91,7 +91,8 @@ def london_silver():
         LondonSilver.objects(
             updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S')
         ).update_one(
-            type=data['type'],
+            upsert=True,
+            name=data['type'],
             price=float(data['price']),
             changepercent=data['changepercent'],
             changequantity=float(data['changequantity']),
@@ -102,7 +103,6 @@ def london_silver():
             amplitude=float(data['amplitude']),
             buyprice=float(data['buyprice']),
             sellprice=float(data['sellprice']),
-            upsert=True
         )
     except:
         print traceback.format_exc()
@@ -137,7 +137,7 @@ def london_gold():
         LondonGold.objects(
             updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S')
         ).update_one(
-            type=data['type'],
+            name=data['type'],
             price=float(data['price']),
             changepercent=data['changepercent'],
             changequantity=float(data['changequantity']),
