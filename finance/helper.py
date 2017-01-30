@@ -1,7 +1,9 @@
 # coding:utf-8
 import datetime
 import pytz
+import requests
 import tushare
+from django.conf import settings
 
 TZ = pytz.timezone('Asia/Shanghai')
 
@@ -67,15 +69,31 @@ class TushareStock(object):
         # 昨测今日买点：1日前的((开盘价+最高价+最低价)/3*2*(4-1))/(4+1)+((最高价+最低价)/2-3日前的(开盘价+最高价+最低价)/3）/4
         return ''
 
-    def code_base_info(self):
-        context = {}
+    # def code_base_info(self):
+    #     context = {}
+    #     df = tushare.get_realtime_quotes(self.code)  # Single stock symbol
+    #     context['name'] = df[['name']].iloc[0]['name']
+    #     context['price'] = df[['price']].iloc[0]['price']
+    #     context['open'] = df[['open']].iloc[0]['open']
+    #     context['height'] = df[['high']].iloc[0]['high']
+    #     context['low'] = df[['low']].iloc[0]['low']
+    #     context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
+    #     return context
 
-        df = tushare.get_realtime_quotes(self.code)  # Single stock symbol
-        context['name'] = df[['name']].iloc[0]['name']
-        context['price'] = df[['price']].iloc[0]['price']
-        context['open'] = df[['open']].iloc[0]['open']
-        context['height'] = df[['high']].iloc[0]['high']
-        context['low'] = df[['low']].iloc[0]['low']
-        context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
-        return context
 
+def stock_info(code):
+    context = {}
+    headers = {
+        'Authorization': 'APPCODE ' + settings.ALIYUN_STOCK_APP_CODE
+    }
+    url = 'http://ali-stock.showapi.com/real-stockinfo?code={code}&needIndex=1&need_k_pic=1'.format(code=code)
+    res = requests.get(url, headers=headers)
+    res = res.json()['showapi_res_body']['stockMarket']
+    context['name'] = res['name']
+    context['price'] = res['nowPrice']
+    context['open'] = res['openPrice']
+    context['height_price'] = res['highLimit']
+    context['low'] = res['downLimit']
+    context['time'] = res['date'] + ' ' +res['time']
+    print context
+    return context

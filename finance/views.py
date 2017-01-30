@@ -1,25 +1,19 @@
 # coding:utf-8
-import datetime
 import json
-
-import pandas
-import tushare as ts
-from django.forms import model_to_dict
+import requests
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
-from pandas.tseries.offsets import BDay
 
-from finance.helper import TushareStock
+from finance.helper import TushareStock, stock_info
 from django.views.decorators.clickjacking import xframe_options_exempt
-from datetime import datetime, timedelta
+from django.conf import settings
 from finance.models import StockPoint
 
 
 @xframe_options_exempt
 def ticks(request, code):
-    ts = TushareStock(code)
-    context = ts.code_base_info()
+    context = stock_info(code)
     context['code'] = code
     context['show'] = int(request.GET.get('show', 1))
     context['height'] = request.GET.get('height','414')
@@ -30,32 +24,14 @@ def ticks(request, code):
     return render(request, 'k_line.html', context)
 
 @xframe_options_exempt
-def get_k_ticks_data(request, code):
-    try:
-        df = ts.get_today_ticks(code)
-    except UnboundLocalError:
-        today = pandas.datetime.today()
-        df = ts.get_tick_data(code, date=(today - BDay(1)).strftime('%Y-%m-%d'))
+def get_k_ticks_data(request, code,days=1):
+    headers = {
+        'Authorization':'APPCODE ' + settings.ALIYUN_STOCK_APP_CODE
+    }
+    url ='http://ali-stock.showapi.com/timeline?code={code}&day={days}'.format(code=code,days=days)
+    res = requests.get(url,headers=headers)
     context = {}
-    context['point'] = []
-    context['time'] = df.to_dict().get('time').values()
-    context['price'] = df.to_dict().get('price').values()
-    context['pchange'] = df.to_dict().get('pchange',{}).values()
-    context['change'] = df.to_dict().get('change').values()
-    context['volume'] = df.to_dict().get('volume').values()
-    context['amount'] = df.to_dict().get('amount').values()
-    context['type'] = df.to_dict().get('type').values()
-    for _index in StockPoint.objects.filter(code=code, date=timezone.now().strftime('%Y-%m-%d')):
-        _type = _index.type
-        context['point'].append(
-            {
-                'name': u'卖' if _type == 'sell' else u'买',
-                'coord': [_index.time, _index.price],
-                'itemStyle': {
-                'normal': {'color': 'red' if _type == 'sell' else 'green'}
-                }
-            }
-        )
+    context['data'] = res.json()
     return JsonResponse(context)
 
 @xframe_options_exempt
@@ -67,7 +43,7 @@ def get_day_k_line(request, code):
     """
     type = request.GET.get('type', 'D')
     ts = TushareStock(code, type)
-    context = ts.code_base_info()
+    context = stock_info(code)
     context['code'] = code
     context['type'] = type
     context['start'] = request.GET.get('start', 50)
@@ -76,21 +52,6 @@ def get_day_k_line(request, code):
     context['data'] = json.dumps(ts.history_data[::-1].to_dict(orient='split')['data'][::-1])
     context['height'] = request.GET.get('height','414')
     return render(request, 'day_k_line.html', context)
-
-
-def stock_open_height_amount(request, code):
-    context = {}
-    df = ts.get_realtime_quotes(code)  # Single stock symbol
-    context['name'] = df[['name']].iloc[0]['name']
-    context['price'] = df[['price']].iloc[0]['price']
-    # context['stock_zd'] = 0
-    context['open'] = df[['open']].iloc[0]['open']
-    # context['stock_yestoday_close'] =0
-    context['height'] = df[['high']].iloc[0]['high']
-    context['low'] = df[['low']].iloc[0]['low']
-    context['amount'] = df[['amount']].iloc[0]['amount']
-    context['time'] = df[['date']].iloc[0]['date'] + '  ' + df[['time']].iloc[0]['time']
-    return JsonResponse(context)
 
 
 def today_buy_point(request, code):
