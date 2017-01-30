@@ -166,7 +166,7 @@ CRONJOBS = [
     ('*/9  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
     ('*/10  * * * *', 'web.tasks.get_guzhang', '>> /var/log/super_worm/get_guzhang.log'),
     ('*/1 * * * *', 'web.tasks.london_gold', '>> /var/log/super_worm/london_gold.log'),
-    ('*/1 * * * *', 'web.tasks.london_silver', '>> /var/log/super_worm/london_gold.log'),
+    ('*/30 * * * *', 'web.tasks.london_silver', '>> /var/log/super_worm/london_gold.log'),
 ]
 
 LOGGING = {
