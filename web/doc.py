@@ -74,3 +74,10 @@ class LondonSilver(Document):
     buyprice = FloatField()
     sellprice = FloatField()
     updatetime = DateTimeField()
+
+
+class FinanceInfo(Document):
+    name = StringField(max_length=32)
+    updatetime = DateTimeField()
+    data = DictField()
+

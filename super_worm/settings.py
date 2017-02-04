@@ -165,8 +165,7 @@ CRONTAB_DJANGO_MANAGE_PATH = '/home/django-scrapy/manage_production.py'
 CRONJOBS = [
     ('*/9  * * * *', 'web.tasks.get_yuncaijing_insider', '>> /var/log/super_worm/get_yuncaijing_insider.log'),
     ('*/10  * * * *', 'web.tasks.get_guzhang', '>> /var/log/super_worm/get_guzhang.log'),
-    ('*/1 * * * *', 'web.tasks.london_gold', '>> /var/log/super_worm/london_gold.log'),
-    ('*/30 * * * *', 'web.tasks.london_silver', '>> /var/log/super_worm/london_gold.log'),
+    ('*/15  * * * *', 'web.tasks.get_finance_brief', '>> /var/log/super_worm/get_finance_brief.log'),
 ]
 
 LOGGING = {

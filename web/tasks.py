@@ -10,10 +10,12 @@ import time
 from bs4 import BeautifulSoup
 from django.utils import timezone
 
-from web.doc import LondonGold, LondonSilver
+from web.doc import LondonGold, LondonSilver, FinanceInfo
 from web.helper import make_aware_timezone
 from web.models import Yuncaijing, Guzhang
 from django.conf import settings
+
+from web.user_agents import USER_AGENTS
 
 
 def get_yuncaijing_insider():
@@ -69,86 +71,38 @@ def get_guzhang():
         print u'error --- %s --- Time:%s' % (e, timezone.localtime(timezone.now()).strftime('%F %R'))
 
 
-def london_silver():
-    """
-        "lastclosingprice":"16.98",
-        "price":"17.07",
-        "updatetime":"2017-01-21 5:49:00",
-        "buyprice":"17.08",
-        "openingprice":"16.99",
-        "changequantity":"0.088",
-        "minprice":"16.80",
-        "sellprice":"17.07",
-        "maxprice":"17.15",
-        "type":"白银美元",
-        "changepercent":"0.47%",
-        "amplitude":"2.10"
-    """
-    url = 'http://api.chinadatapay.com/financial/commodity/191/5?key={key}'.format(key=settings.SHUJUBAO_SILVER_KEY)
-    try:
-        res = requests.get(url)
-        data = res.json()['data'][0]
-        LondonSilver.objects(
-            updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S')
-        ).update_one(
-            upsert=True,
-            name=data['type'],
-            price=float(data['price']),
-            changepercent=data['changepercent'],
-            changequantity=float(data['changequantity']),
-            openingprice=float(data['openingprice']),
-            maxprice=float(data['maxprice']),
-            minprice=float(data.get('minprice', 0.0)),
-            lastclosingprice=float(data['lastclosingprice']),
-            amplitude=float(data['amplitude']),
-            buyprice=float(data['buyprice']),
-            sellprice=float(data['sellprice']),
-        )
-    except:
-        print traceback.format_exc()
+def get_finance_brief():
+    url = "https://hk.investing.com/common/technical_studies/technical_studies_data.php?action=get_studies&pair_ID={id}&time_frame=900"
 
-
-def london_gold():
-    """
-    {
-        "code": "10000",
-        "message": "成功",
-        "data": [
-            {
-                "lastclosingprice": "1203.36",
-                "price": "1201.91",
-                "updatetime": "2017-01-20 22:53:00",
-                "buyprice": "1202.09",
-                "openingprice": "1203.60",
-                "changequantity": "-1.45",
-                "sellprice": "1201.91",
-                "maxprice": "1209.07",
-                "type": "黄金美元",
-                "changepercent": "-0.14%",
-                "amplitude": ".90"
-            }
-        ]
+    finance = {
+        u"白银": 8836,
+        u"黄金": 8830,
+        u"铜": 8831,
+        u"原油": 8849,
+        u"天然气": 8862,
+        u"小麦": 8917,
+        u"大豆": 8916
     }
-    """
-    url = 'http://api.chinadatapay.com/financial/commodity/170/5?key={key}'.format(key=settings.SHUJUBAO_GOLD_KEY)
-    try:
-        res = requests.get(url)
-        data = res.json()['data'][0]
-        LondonGold.objects(
-            updatetime=make_aware_timezone(data['updatetime'], '%Y-%m-%d %H:%M:%S')
-        ).update_one(
-            name=data['type'],
-            price=float(data['price']),
-            changepercent=data['changepercent'],
-            changequantity=float(data['changequantity']),
-            openingprice=float(data['openingprice']),
-            maxprice=float(data['maxprice']),
-            minprice=float(data.get('minprice', 0.0)),
-            lastclosingprice=float(data['lastclosingprice']),
-            amplitude=float(data['amplitude']),
-            buyprice=float(data['buyprice']),
-            sellprice=float(data['sellprice']),
-            upsert=True
-        )
-    except:
-        print traceback.format_exc()
+    headers = {
+        "User-Agent": random.choice(USER_AGENTS),
+    }
+    for _name in finance:
+        while 1:
+            try:
+                res = requests.get(url.format(id=finance[_name]), headers=headers)
+
+                if res.status_code == 200:
+                    all_info = res.content.split('</style>')[-1].split('<dl class="splitbar">')[0].strip().split('*;*')
+                    datas = {}
+                    for i in all_info:
+                        _key = i.split('=')[0]
+                        _value = i.split('=')[1]
+                        datas[_key] = _value.decode('utf8')
+                    FinanceInfo.objects(name=_name).update_one(
+                        updatetime=timezone.now(),
+                        data=datas,
+                        upsert=True
+                    )
+                    break
+            except:
+                print traceback.format_exc()

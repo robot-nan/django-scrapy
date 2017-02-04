@@ -12,6 +12,8 @@ from bs4 import BeautifulSoup
 from django.utils import timezone
 from lxml import etree
 from user_agents import USER_AGENTS
+from web.doc import FinanceInfo
+
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36"
 
 
@@ -67,45 +69,10 @@ def get_kxt(request, date=None):
     return JsonResponse({'data': item, 'now_time': timezone.now()})
 
 
-def get_investing(request):
-    url = "http://cn.investing.com/technical/%E5%95%86%E5%93%81-%E6%8C%87%E6%A0%87"
-    res = requests.get(url)
-    soup = BeautifulSoup(res.content, 'html.parser')
-
-    data = OrderedDict((
-        ('gold', []),
-        ('silver', []),
-        ('copper', []),
-        ('oil', []),
-        ('gas', []),
-        ('wheat', []),
-    ))
-    for _num in xrange(0, 11 + 1):
-        #todo： 结构变了 需要重新调整
-        info_soup = soup.find_all(attrs={'id': 'pair_{num}'.format(num=_num)})
-
-        res_soup = soup.find_all(attrs={'class': 'movingAveragesTbl'})
-        for _value, _res, _key in zip(info_soup, res_soup, data):
-            _tmp = _res.find_all('td')[:-1]
-            _buy = _tmp[0].text
-            _sale = _tmp[1].text
-            _mid = _tmp[2].text
-            _summary = _res.find('span').text
-
-            data[_key].append({'name': _value.find(attrs={'id': 'pair_name_{num}'.format(num=_num)}).text,
-                               'value': _value.find(attrs={'id': 'open_{num}'.format(num=_num)}).text,
-                               'res':
-                                   {
-                                       'buy': _buy,
-                                       'sale': _sale,
-                                       'mid': _mid,
-                                       'summary': _summary
-                                   },
-                               'action': _value.find('span').text
-                               }
-                              )
-
-    return JsonResponse({'data': data, 'now_time': timezone.now()})
+def get_investing(request,name):
+    print name
+    res = FinanceInfo.objects.filter(name=name).first().data
+    return JsonResponse(res)
 
 
 def wezone(request, code):
