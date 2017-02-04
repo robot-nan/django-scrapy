@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import random
+import re
 import traceback
 
 import requests
@@ -98,11 +99,16 @@ def get_finance_brief():
                         _key = i.split('=')[0]
                         _value = i.split('=')[1]
                         datas[_key] = _value.decode('utf8')
+                    # _up_low = re.findall('<dd.*>(?P<name>\d*%)</dd>?', res.content)[0]
+                    # _up = _up_low[0]
+                    # _low = _up_low[1]
+                    # datas['user']
                     FinanceInfo.objects(name=_name).update_one(
                         updatetime=timezone.now(),
                         data=datas,
                         upsert=True
                     )
+
                     break
             except:
                 print traceback.format_exc()
