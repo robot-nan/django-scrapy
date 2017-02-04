@@ -69,16 +69,14 @@ def get_kxt(request, date=None):
     return JsonResponse({'data': item, 'now_time': timezone.now()})
 
 
-def get_investing(request,name):
-    res = FinanceInfo.objects.filter(name=name.decode('utf8')).first().data
+def get_investing(request,code):
+    res = FinanceInfo.objects.filter(name=code).first().data
     return JsonResponse(res)
 
 
 def wezone(request, code):
     data = {}
-
     res = requests.get('http://wx.wezone.wang/stock/detail?code=' + code)
-
     code = re.findall('"http://hq.sinajs.cn/list=(?P<date>.*)"', res.content)[0]
     url = 'http://hq.sinajs.cn/list=' + code
     _res = requests.get(url)

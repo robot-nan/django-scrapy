@@ -77,6 +77,7 @@ class LondonSilver(Document):
 
 
 class FinanceInfo(Document):
+    code = StringField(max_length=32)
     name = StringField(max_length=32)
     updatetime = DateTimeField()
     data = DictField()
