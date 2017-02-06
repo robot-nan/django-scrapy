@@ -70,7 +70,7 @@ def get_kxt(request, date=None):
 
 
 def get_investing(request,code):
-    res = FinanceInfo.objects.filter(name=code).first().data
+    res = FinanceInfo.objects.filter(code=code).first().data
     return JsonResponse(res)
 
 
