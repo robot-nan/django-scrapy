@@ -126,8 +126,12 @@ def get_k_datas():
         for _time in times:
             _url = url.format(code=_code, time=_time)
             res = requests.get(_url, headers=headers)
-            StackDatas.objects(code=_code, time=_time).update_one(
-                updatetime=timezone.now(),
-                data=res.json(),
-                upsert=True
-            )
+            res = res.json()
+            if res['ret_code'] == 0:
+                StackDatas.objects(code=_code, time=_time).update_one(
+                    updatetime=timezone.now(),
+                    data=res,
+                    upsert=True
+                )
+            else:
+                print timezone.now(), '===', _code, '===', _time, '===', res, '\n'
