@@ -82,3 +82,15 @@ class FinanceInfo(Document):
     updatetime = DateTimeField()
     data = DictField()
 
+class StackDatas(Document):
+    code = IntField()
+    time = StringField(max_length=8)
+    updatetime  = DateTimeField()
+    data = DictField()
+
+
+class StackSettings(Document):
+    name = StringField(max_length=32)
+    updatetime = DateTimeField()
+    list_data = ListField()
+

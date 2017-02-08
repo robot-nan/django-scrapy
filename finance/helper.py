@@ -95,5 +95,4 @@ def stock_info(code):
     context['height_price'] = res['highLimit']
     context['low'] = res['downLimit']
     context['time'] = res['date'] + ' ' +res['time']
-    print context
     return context

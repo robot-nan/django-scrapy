@@ -1,21 +1,15 @@
 # coding: utf-8
 
 import random
-import re
+import tushare as ts
 import traceback
-
 import requests
 import json
-
-import time
 from bs4 import BeautifulSoup
 from django.utils import timezone
-
-from web.doc import LondonGold, LondonSilver, FinanceInfo
-from web.helper import make_aware_timezone
+from web.doc import FinanceInfo, StackSettings, StackDatas
 from web.models import Yuncaijing, Guzhang
 from django.conf import settings
-
 from web.user_agents import USER_AGENTS
 
 
@@ -100,7 +94,7 @@ def get_finance_brief():
                         _value = i.split('=')[1]
                         datas[_key] = _value.decode('utf8')
 
-                    FinanceInfo.objects(name=_name,code=str(finance[_name])).update_one(
+                    FinanceInfo.objects(name=_name, code=str(finance[_name])).update_one(
                         updatetime=timezone.now(),
                         data=datas,
                         upsert=True
@@ -109,3 +103,31 @@ def get_finance_brief():
                     break
             except:
                 print traceback.format_exc()
+
+
+def get_stack_code():
+    res = ts.get_stock_basics()
+    codes = res['name'].to_dict().keys()
+    StackSettings.objects(name='stack_list').update_one(
+        updatetime=timezone.now(),
+        list_data=codes,
+        upsert=True
+    )
+
+
+def get_k_datas():
+    headers = {
+        'Authorization': 'APPCODE ' + settings.ALIYUN_STOCK_APP_CODE
+    }
+    times = [u'5', u'30', u'60', u'day', u'week', u'month']
+    url = "http://ali-stock.showapi.com/realtime-k?code={code}&time={time}"
+    codes = StackSettings.objects.filter(name='stack_list').first().list_data
+    for _code in codes:
+        for _time in times:
+            _url = url.format(code=_code, time=_time)
+            res = requests.get(_url, headers=headers)
+            StackDatas.objects(code=_code, time=_time).update_one(
+                updatetime=timezone.now(),
+                data=res.json(),
+                upsert=True
+            )
