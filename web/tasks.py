@@ -127,7 +127,7 @@ def get_k_datas():
             _url = url.format(code=_code, time=_time)
             res = requests.get(_url, headers=headers)
             res = res.json()
-            if res['ret_code'] == 0:
+            if not res['showapi_res_error']:
                 StackDatas.objects(code=_code, time=_time).update_one(
                     updatetime=timezone.now(),
                     data=res,
