@@ -14,7 +14,6 @@ GlOD_SHOW_TIME_CHOICE = (
     (u'7', u'每月'),
 )
 
-
 class BaseTime(models.Model):
     """基本模型，带创建更新时间"""
     created = models.DateTimeField(u'创建时间', auto_now_add=True)

@@ -135,3 +135,4 @@ def get_k_datas():
                 )
             else:
                 print timezone.now(), '===', _code, '===', _time, '===', res, '\n'
+
