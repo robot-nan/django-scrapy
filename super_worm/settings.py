@@ -63,10 +63,9 @@ MIDDLEWARE_CLASSES = [
 ]
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, '/static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/', 'static/tradingview/charting_librarystatic/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/','static/tradingview/charting_librarystatic/')
 
 STATICFILES_DIRS = (
-    # os.path.join(BASE_DIR, '/static'),
     os.path.join(BASE_DIR, "static/"),
     os.path.join(BASE_DIR, "static/tradingview/charting_librarystatic/"),
 )
