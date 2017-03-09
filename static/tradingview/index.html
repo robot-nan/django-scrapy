@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <title>TradingView Charting Library demo</title>
+
+    <!-- Fix for iOS Safari zooming bug -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"><\/script>')</script>
+    <script type="text/javascript" src="charting_library/charting_library.min.js"></script>
+    <script src="charting_library/datafeed/udf/hejdatafeed.js"></script>
+    <!--<script type="text/javascript" src="charting_library/datafeed/udf/datafeed.js"></script>-->
+
+    <script type="text/javascript">
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)")
+            results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        console.log(getParameterByName('symbol') || "SZ000002")
+        TradingView.onready(function () {
+            var widget = window.tvWidget = new TradingView.widget({
+                fullscreen: true,
+                symbol: getParameterByName('symbol') || "SZ000002",
+                interval: '1D',
+                container_id: "tv_chart_container",
+                //	BEWARE: no trailing slash is expected in feed URL
+                datafeed: new Datafeeds.UDFCompatibleDatafeed("http://api.markets.wallstreetcn.com/v1/tradingView"),
+
+                library_path: "charting_library/",
+                locale: getParameterByName('lang') || "zh",
+                //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+                drawings_access: {type: 'black', tools: [{name: "Regression Trend"}]},
+                disabled_features: ["use_localstorage_for_settings"],
+                enabled_features: ["study_templates"],
+                charts_storage_url: 'http://saveload.tradingview.com',
+                charts_storage_api_version: "1.1",
+                client_id: 'tradingview.com',
+                user_id: 'public_user_id'
+            });
+//				widget.onChartReady(function () {
+//					widget.chart().createStudy('Correlation', false, true);
+//					widget.chart().createStudy('Spread', false, true);
+//				});
+        });
+
+    </script>
+
+</head>
+
+<body style="margin:0px;">
+<div id="tv_chart_container"></div>
+</body>
+
+</html>
