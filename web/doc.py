@@ -94,3 +94,12 @@ class StackSettings(Document):
     updatetime = DateTimeField()
     list_data = ListField()
 
+class FuturesTimeSharing(Document):
+    market = IntField()
+    code = StringField(max_length=32)
+    list_data = ListField()
+
+class FuturesK(Document):
+    market = IntField()
+    code = StringField(max_length=32)
+    list_data = ListField()

@@ -96,3 +96,6 @@ def set_point(request):
         return JsonResponse({'successful': 1})
     else:
         return render(request, 'k_line_manager.html')
+
+def tradingview(request):
+    return render(request, 'tradingview.html')

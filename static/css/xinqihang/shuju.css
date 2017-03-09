@@ -1,0 +1,78 @@
+.content-info {
+    margin-top: 15px;
+    padding-top: 15px;
+    height: 490px;
+    background: rgba(80, 104, 191, 0.5);
+}
+
+.content-info .title {
+    margin-top: 30px;
+    text-align: center;
+    color: white;
+}
+
+.attention-name {
+    text-align: center;
+    margin: 15px 30%;
+    background: rgba(80, 162, 255, .7);
+    color: #c41d2b;
+}
+
+.attention-name h2 {
+    line-height: 2;
+}
+
+.attention-name .icon {
+    position: relative;
+    left: -15px;
+}
+
+.items {
+    margin-top: 15px;
+
+}
+
+.items .item {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.items .item .box {
+    border: 1px solid #94aae1;
+    padding-top: 20px;
+}
+
+.item img {
+    width: 100%;
+}
+
+.items .item .action {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.items .item .action button {
+    width: 80%;
+}
+
+#connect-service-modal p {
+    font-size: 16px;
+    text-align: left;
+}
+
+#connect-service-modal .header p {
+    font-size: 20px;
+}
+
+#connect-service-modal .title p {
+    font-size: 18px;
+
+}
+
+#connect-service-modal .choose-date {
+    float: right;
+    font-size: 14px;
+    font-weight: normal;
+
+}

@@ -1,0 +1,93 @@
+.border {
+    border: 1px solid;
+}
+
+.left-icons {
+    padding: 15px;
+
+}
+
+.left-icons .item-box:first-child {
+    margin-top: 0;
+}
+
+.left-icons .item-box {
+    height: 140px;
+    color: white;
+    box-shadow: 2px 3px 3px -2px #333;
+    border: none;
+    margin-top: 35px;
+}
+
+.left-icons .item-box .left-box {
+    text-align: center;
+    height: 100%;
+    padding: 32px 0 33px 0;
+}
+
+.left-icons .item-box .right-box {
+    height: 140px;
+
+}
+
+.left-icons .item-box.one .left-box {
+    background: #3168c3;
+
+}
+
+.left-icons .item-box.two .left-box {
+    background: #00b7ee;
+}
+
+.left-icons .item-box.three .left-box {
+    background: #64a6ff
+
+}
+
+.left-icons .item-box.one .right-box {
+    background: -moz-linear-gradient(top, rgba(46, 102, 201, 0.76) 45%, #2754bc 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(46, 102, 201, 0.76)), color-stop(100%, #2754bc));
+    background: -webkit-linear-gradient(top, rgba(46, 102, 201, 0.76) 45%, #2754bc 100%);
+    background: -o-linear-gradient(top, rgba(46, 102, 201, 0.76) 45%, #2754bc 100%);
+    background: -ms-linear-gradient(top, rgba(46, 102, 201, 0.76) 45%, #2754bc 100%);
+    background: linear-gradient(to bottom, rgba(46, 102, 201, 0.76) 45%, #2754bc 100%);
+}
+
+.left-icons .item-box.two .right-box {
+    background: -moz-linear-gradient(top, rgba(21, 144, 218, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(18%, rgba(21, 144, 218, 0.89)), color-stop(100%, rgba(17, 119, 210, 0.43)));
+    background: -webkit-linear-gradient(top, rgba(21, 144, 218, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -o-linear-gradient(top, rgba(21, 144, 218, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -ms-linear-gradient(top, rgba(21, 144, 218, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: linear-gradient(to bottom, rgba(21, 144, 218, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+}
+
+.left-icons .item-box.three .right-box {
+    background: -moz-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(18%, rgba(21, 144, 218, 0.89)), color-stop(100%, rgba(17, 119, 210, 0.43)));
+    background: -webkit-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -o-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: -ms-linear-gradient(top, rgba(76, 135, 226, 0.89) 18%, rgba(17, 119, 210, 0.43) 100%);
+    background: linear-gradient(to bottom, rgba(76, 135, 226, 0.89) 18%, rgba(62, 111, 220, 0.43) 100%);
+}
+
+.left-icons .item-box .left-box.two {
+    background: #00b7ee
+}
+
+.left-icons .item-box .left-box.three {
+    background: #64a6ff
+}
+
+.right-info {
+    margin-top: 15px;
+    height: 490px;
+    box-shadow: 2px 3px 3px -2px #333;
+    background: rgba(80, 104, 191, 0.5);
+}
+#connect-service-modal .content{
+
+}
+#connect-service-modal .content .icon{
+    font-size: 40px;
+}

@@ -1,0 +1,14 @@
+.logo p {
+    font-size: 20em;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.login {
+    text-align: center;
+}
+
+.login div {
+    line-height: 4em;
+}
