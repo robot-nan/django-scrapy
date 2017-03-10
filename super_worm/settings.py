@@ -62,14 +62,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, '/static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'static','static/','static/tradingview/charting_librarystatic/')
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "static/"),
-    os.path.join(BASE_DIR, "static/tradingview/charting_librarystatic/"),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
@@ -164,7 +157,7 @@ USE_TZ = True
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 CRONTAB_LOCK_JOBS = False
