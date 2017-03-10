@@ -26,7 +26,7 @@
         TradingView.onready(function () {
             var widget = window.tvWidget = new TradingView.widget({
                 fullscreen: true,
-                symbol: getParameterByName('symbol') || "SZ000002",
+                symbol: getParameterByName('SZ000001') || "SZ000002",
                 interval: '1D',
                 container_id: "tv_chart_container",
                 //	BEWARE: no trailing slash is expected in feed URL
