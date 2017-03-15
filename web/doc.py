@@ -82,10 +82,11 @@ class FinanceInfo(Document):
     updatetime = DateTimeField()
     data = DictField()
 
+
 class StackDatas(Document):
     code = IntField()
     time = StringField(max_length=8)
-    updatetime  = DateTimeField()
+    updatetime = DateTimeField()
     data = DictField()
 
 
@@ -94,12 +95,16 @@ class StackSettings(Document):
     updatetime = DateTimeField()
     list_data = ListField()
 
+
 class FuturesTimeSharing(Document):
     market = IntField()
     code = StringField(max_length=32)
     list_data = ListField()
 
+
 class FuturesK(Document):
     market = IntField()
+    type = IntField()
     code = StringField(max_length=32)
+    update_time = DateTimeField()
     list_data = ListField()

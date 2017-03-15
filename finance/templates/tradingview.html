@@ -11,43 +11,48 @@
 
     <script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
     <!--<script>window.jQuery || document.write('<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"><\/script>')</script>-->
-    <script type="text/javascript" src="{% static 'tradingview/charting_library/charting_library.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'tradingview/charting_library/charting_library.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'tradingview/charting_library/datafeed/udf/hejdatafeed.js' %}"></script>
     <!--<script type="text/javascript" src="charting_library/datafeed/udf/datafeed.js"></script>-->
 
     <script type="text/javascript">
 
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)")
-            results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        }
-        console.log(getParameterByName('symbol') || "SZ000002")
+
         TradingView.onready(function () {
+
             var widget = window.tvWidget = new TradingView.widget({
                 fullscreen: true,
-                symbol: getParameterByName('symbol') || "SZ000002",
+                symbol: "SZ000001",
                 interval: '1D',
                 container_id: "tv_chart_container",
                 //	BEWARE: no trailing slash is expected in feed URL
-                datafeed: new Datafeeds.UDFCompatibleDatafeed("http://api.markets.wallstreetcn.com/v1/tradingView"),
+                {#                datafeed: new Datafeeds.UDFCompatibleDatafeed("http://api.markets.wallstreetcn.com/v1/tradingView"),#}
+                datafeed: new Datafeeds.UDFCompatibleDatafeed('http://127.0.0.1:8000/finance'),
 
                 library_path: "{% static 'tradingview/charting_library/' %}",
-                locale: getParameterByName('lang') || "zh",
+                locale: "zh",
                 //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
                 drawings_access: {type: 'black', tools: [{name: "Regression Trend"}]},
-                disabled_features: ["use_localstorage_for_settings"],
+{#                disabled_features: ["use_localstorage_for_settings","header_symbol_search"],#}
                 enabled_features: ["study_templates"],
                 charts_storage_url: 'http://saveload.tradingview.com',
                 charts_storage_api_version: "1.1",
                 client_id: 'tradingview.com',
-                user_id: 'public_user_id'
+                user_id: 'public_user_id',
+                disabled_features: [
+                    'left_toolbar', 'timeframes_toolbar', 'edit_buttons_in_legend', 'context_menus', 'control_bar', 'border_around_the_chart','header_indicators','header_fullscreen_button', 'header_screenshot',
+                    'header_undo_redo','header_compare','display_market_status','show_interval_dialog_on_key_press','save_chart_properties_to_local_storage','chart_property_page_timezone_sessions','edit_buttons_in_legend',
+                    'header_symbol_search', 'header_settings',"use_localstorage_for_settings", "volume_force_overlay"
+                ],
+                favorites: {
+                        intervals: ["1","5","15","60", "1D"],
+                        chartTypes: ["Candles", "Line"]
+                }
             });
-//				widget.onChartReady(function () {
-//					widget.chart().createStudy('Correlation', false, true);
-//					widget.chart().createStudy('Spread', false, true);
-//				});
+{#            widget.onChartReady(function () {#}
+{#                widget.chart().createStudy('Correlation', false, true);#}
+{#                widget.chart().createStudy('Spread', false, true);#}
+{#            });#}
         });
 
     </script>

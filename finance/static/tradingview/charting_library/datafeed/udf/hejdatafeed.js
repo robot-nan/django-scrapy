@@ -79,8 +79,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype._logMessage = function(message) {
 Datafeeds.UDFCompatibleDatafeed.prototype._initialize = function() {
 
     var that = this;
-
-    $.ajax({url : this._datafeedURL + "/config", dataType : 'jsonp'}).
+    $.ajax({url : this._datafeedURL + "/config", dataType : 'json'}).
     done(function(response) {
         var configurationData = response;
         that._setupWithConfiguration(configurationData);
@@ -165,7 +164,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype.searchSymbolsByName = function(ticker,
 
     if (this._configuration.supports_search) {
 
-        $.ajax({url : this._datafeedURL + "/search?limit=" + MAX_SEARCH_RESULTS  +"&query=" + ticker + "&type=" + type + "&exchange=" + exchange, dataType : 'jsonp'})
+        $.ajax({url : this._datafeedURL + "/search?limit=" + MAX_SEARCH_RESULTS  +"&query=" + ticker + "&type=" + type + "&exchange=" + exchange, dataType : 'json'})
             .done(function (response) {
                 var data = response;
 
@@ -232,9 +231,9 @@ Datafeeds.UDFCompatibleDatafeed.prototype.resolveSymbol = function(symbolName, o
 
     if (!this._configuration.supports_group_request) {
         var requestURL = this._datafeedURL + "/symbols?symbol=" + encodeURIComponent(symbolName);
+        console.log(requestURL)
         this._logMessage(requestURL);
-
-        $.ajax({url : requestURL, dataType : 'jsonp'})
+        $.ajax({url : requestURL, dataType : 'json'})
             .done(function (response) {
                 var data = response;
 
@@ -300,9 +299,8 @@ Datafeeds.UDFCompatibleDatafeed.prototype.getBars = function(symbolInfo, resolut
 
     this._logMessage("Requesting data from " + requestURL);
 
-    $.ajax({url : requestURL, dataType : 'jsonp'})
+    $.ajax({url : requestURL, dataType : 'json'})
         .done(function (response) {
-
             var data = response;
 
             if (data.s != "ok") {
@@ -415,7 +413,7 @@ Datafeeds.SymbolsStorage.prototype._requestFullSymbolsList = function() {
         var requestURL = datafeed._datafeedURL + "/symbol_info?group=" + exchange;
         this._datafeed._logMessage("requesting exnchage info from " + requestURL);
 
-        $.ajax({url : requestURL ,  dataType : 'jsonp'}).
+        $.ajax({url : requestURL ,  dataType : 'json'}).
         done(function(exchange) {
             return function(response) {
                 that._onExchangeDataReceived(exchange, response);
