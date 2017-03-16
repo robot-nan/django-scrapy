@@ -104,39 +104,81 @@ def set_point(request):
         return render(request, 'k_line_manager.html')
 
 
-def tradingview(request):
-    return render(request, 'tradingview.html')
+def finance_k(request, code):
+    context = {}
+    context['symbol'] = code
+    return render(request, 'finance_k.html', context)
 
 
 def tradingview_config(request):
-    q = {"supports_search": True, "supports_group_request": False, "exchanges": [{"value": "", "name": "All Exchanges", "desc": ""}], "symbolsTypes": [{"name": "All types", "value": ""}, {"name": "CFD", "value": "cfdindice"}, {"name": "Bond", "value": "bond"}, {"name": "Index", "value": "index"}, {"name": "Commodity", "value": "commodity"}, {"name": "Forex", "value": "forex"}, {"name": "Stock", "value": "stock"}], "supportedResolutions": [1, 5, 15, 30, 60, 240, "1D", "1W", "1M"]}
+    q = {
+        "supports_search": True,
+        "supports_group_request": False,
+        "exchanges": [
+            {
+                "value": "",
+                "name": "All Exchanges",
+                "desc": ""
+            }
+        ], "symbolsTypes": [
+            {
+                "name": "All types",
+                "value": ""
+            },
+            {
+                "name": "CFD",
+                "value": "cfdindice"
+            },
+            {
+                "name": "Bond", "value": "bond"
+            },
+            {
+                "name": "Index", "value": "index"
+            }, {"name": "Commodity", "value": "commodity"},
+            {"name": "Forex", "value": "forex"},
+            {"name": "Stock", "value": "stock"}],
+        "supportedResolutions": ["1", "5", "15", "30", "60", "D", "W", "M"]}
     return JsonResponse(q)
 
 
-def search(request):
-    pass
-
-
 def symbol_info(request):
-    q = {"description": u"纽约黄金",
+    print request.GET
+    symbol = request.GET.get('symbol')
+    q = {
+        '111081': [u'现货黄金','111081'],
+        '111082': [u'现货白银','111082']
+    }
+    q = {"description": q[symbol][0],
          "has_no_volume": True,
          "session": "24x7",
          "has_intraday": True,
          "timezone": "UTC",
-         "ticker": {},
+         "ticker": q[symbol][1],
          "minmov2": 0,
-         # "name": "111081",
+         "name": q[symbol][1],
          "type": "stock",
-         "intraday_multipliers": ["1", "5", "15", "30", "60", "240"],
+         # "type": "commodity",
+         "intraday_multipliers": ["1", "5", "15", "30", "60", "D", "W", "M"],
          "minmov": 1,
          "exchange-traded": "",
          "pricescale": 100,
          "exchange-listed": ""}
+
     return JsonResponse(q)
 
 
 def markets(request):
-    datas = FuturesK.objects.filter(market=13, code='111081', type=9).first()
-    datas.list_data['t'] = map(lambda x: int(time.mktime(time.strptime(x, '%Y%m%d'))), datas.list_data['t'])
-    print datas.list_data['t']
+    symbol = request.GET.get('symbol')
+    num = request.GET.get('resolution')
+    resolution = {
+        "1": 7,
+        "5": 0,
+        "15": 1,
+        "30": 2,
+        "60": 3,
+        "D": 4,
+        "W": 5,
+        "M": 6
+    }
+    datas = FuturesK.objects.filter(market=13, code=symbol, type=resolution[num]).first()
     return JsonResponse(datas.list_data)

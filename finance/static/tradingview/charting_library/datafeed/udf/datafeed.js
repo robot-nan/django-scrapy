@@ -106,7 +106,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype._initialize = function() {
 
 	this._send(this._datafeedURL + '/config')
 		.done(function(response) {
-			var configurationData = JSON.parse(response);
+			var configurationData = response;
 			that._setupWithConfiguration(configurationData);
 		})
 		.fail(function(reason) {
@@ -173,7 +173,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype.getMarks = function (symbolInfo, range
 				resolution: resolution
 			})
 			.done(function (response) {
-				onDataCallback(JSON.parse(response));
+				onDataCallback(response);
 			})
 			.fail(function() {
 				onDataCallback([]);
@@ -190,7 +190,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype.getTimescaleMarks = function (symbolIn
 			resolution: resolution
 		})
 			.done(function (response) {
-				onDataCallback(JSON.parse(response));
+				onDataCallback(response);
 			})
 			.fail(function() {
 				onDataCallback([]);
@@ -215,7 +215,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype.searchSymbols = function(searchString,
 				exchange: exchange
 			})
 			.done(function (response) {
-				var data = JSON.parse(response);
+				var data = response;
 
 				for (var i = 0; i < data.length; ++i) {
 					if (!data[i].params) {
@@ -293,7 +293,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype.resolveSymbol = function(symbolName, o
 				symbol: symbolName ? symbolName.toUpperCase() : ''
 			})
 			.done(function (response) {
-				var data = JSON.parse(response);
+				var data = response;
 
 				if (data.s && data.s != 'ok') {
 					onResolveErrorCallback('unknown_symbol');
@@ -337,7 +337,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype.getBars = function(symbolInfo, resolut
 	})
 	.done(function (response) {
 
-		var data = JSON.parse(response);
+		var data = response;
 
 		var nodata = data.s == 'no_data';
 
@@ -405,7 +405,7 @@ Datafeeds.UDFCompatibleDatafeed.prototype.calculateHistoryDepth = function(perio
 Datafeeds.UDFCompatibleDatafeed.prototype.getQuotes = function(symbols, onDataCallback, onErrorCallback) {
 	this._send(this._datafeedURL + '/quotes', { symbols: symbols })
 		.done(function (response) {
-			var data = JSON.parse(response);
+			var data = response;
 			if (data.s == 'ok') {
 				//	JSON format is {s: "status", [{s: "symbol_status", n: "symbol_name", v: {"field1": "value1", "field2": "value2", ..., "fieldN": "valueN"}}]}
 				if (onDataCallback) {
@@ -476,7 +476,7 @@ Datafeeds.SymbolsStorage.prototype._requestFullSymbolsList = function() {
 			})
 			.done(function(exchange) {
 				return function(response) {
-					that._onExchangeDataReceived(exchange, JSON.parse(response));
+					that._onExchangeDataReceived(exchange, response);
 					that._onAnyExchangeResponseReceived(exchange);
 				};
 			}(exchange)) //jshint ignore:line

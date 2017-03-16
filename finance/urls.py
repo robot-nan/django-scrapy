@@ -4,7 +4,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = patterns('finance.views',
                        url(r'^k_line/(?P<code>.*)/$', 'ticks', name='ticks'),
-                       url(r'^trading_chart/$', 'tradingview', name='tradingview'),
+
+                       url(r'^finance_k/(?P<code>.*)/$', 'finance_k', name='tradingview'),
                        url(r'^config/$', 'tradingview_config', name='tradingview_config'),
                        url(r'^symbols/$', 'symbol_info', name='symbol_info'),
                        url(r'^search/$', 'search', name='search'),
