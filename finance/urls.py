@@ -8,7 +8,6 @@ urlpatterns = patterns('finance.views',
                        url(r'^finance_k/(?P<code>.*)/$', 'finance_k', name='tradingview'),
                        url(r'^config/$', 'tradingview_config', name='tradingview_config'),
                        url(r'^symbols/$', 'symbol_info', name='symbol_info'),
-                       url(r'^search/$', 'search', name='search'),
 
                        url(r'^history$', 'markets', name='market'),
                        url(r'^get_k_ticks_data/(?P<code>.*)/$', 'get_k_ticks_data', name='get k ticks data'),
