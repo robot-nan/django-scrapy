@@ -104,12 +104,14 @@ def set_point(request):
         return render(request, 'k_line_manager.html')
 
 
+@xframe_options_exempt
 def finance_k(request, code):
     context = {}
     context['symbol'] = code
     return render(request, 'finance_k.html', context)
 
 
+@xframe_options_exempt
 def tradingview_config(request):
     q = {
         "supports_search": True,
@@ -141,6 +143,7 @@ def tradingview_config(request):
     return JsonResponse(q)
 
 
+@xframe_options_exempt
 def symbol_info(request):
     print request.GET
     symbol = request.GET.get('symbol')
@@ -166,7 +169,7 @@ def symbol_info(request):
 
     return JsonResponse(q)
 
-
+@xframe_options_exempt
 def markets(request):
     symbol = request.GET.get('symbol')
     num = request.GET.get('resolution')
