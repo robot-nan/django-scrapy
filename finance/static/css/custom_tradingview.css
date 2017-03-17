@@ -1,0 +1,9 @@
+.save-load-buttons{
+    display: none;
+}
+.header-chart-panel .right{
+    display: none;
+}
+.button.toggle-caption.compare.apply-common-tooltip{
+    display: none;
+}

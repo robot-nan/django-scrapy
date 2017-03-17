@@ -24,36 +24,30 @@
                 fullscreen: true,
                 symbol: "{{ symbol }}",
                 interval: 'D',
+                supports_marks: true,
+                same_data_requery: true,
                 container_id: "tv_chart_container",
                 //	BEWARE: no trailing slash is expected in feed URL
-{#                                datafeed: new Datafeeds.UDFCompatibleDatafeed("http://api.markets.wallstreetcn.com/v1/tradingView"),#}
-{#                datafeed: new Datafeeds.UDFCompatibleDatafeed('http://127.0.0.1:8000/finance'),#}
-                datafeed: new Datafeeds.UDFCompatibleDatafeed('http://www.chinayunju.com/finance'),
+                {#                                datafeed: new Datafeeds.UDFCompatibleDatafeed("http://api.markets.wallstreetcn.com/v1/tradingView"),#}
+                datafeed: new Datafeeds.UDFCompatibleDatafeed('http://127.0.0.1:8000/finance'),
+                {#                datafeed: new Datafeeds.UDFCompatibleDatafeed('http://www.chinayunju.com/finance'),#}
 
                 library_path: "{% static 'tradingview/charting_library/' %}",
                 locale: "zh",
+                custom_css_url: "{% static 'css/custom_tradingview.css' %}",
                 //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
                 drawings_access: {type: 'black', tools: [{name: "Regression Trend"}]},
-                disabled_features: ["use_localstorage_for_settings","header_symbol_search"],
+                disabled_features: ["use_localstorage_for_settings", "header_symbol_search"],
                 enabled_features: ["study_templates"],
                 charts_storage_url: 'http://saveload.tradingview.com',
                 charts_storage_api_version: "1.1",
                 client_id: 'tradingview.com',
                 user_id: 'public_user_id',
-{#                disabled_features: [#}
-{#                    'left_toolbar', 'timeframes_toolbar', 'edit_buttons_in_legend', 'context_menus', 'control_bar', 'border_around_the_chart','header_indicators','header_fullscreen_button', 'header_screenshot',#}
-{#                    'header_undo_redo','header_compare','display_market_status','show_interval_dialog_on_key_press','save_chart_properties_to_local_storage','chart_property_page_timezone_sessions','edit_buttons_in_legend',#}
-{#                    'header_symbol_search', 'header_settings',"use_localstorage_for_settings", "volume_force_overlay"#}
-{#                ],#}
-{#                favorites: {#}
-{#                        intervals: [1,5,15,30,60, "1D"],#}
-{#                        chartTypes: ["Candles", "Line"]#}
-{#                }#}
+                overrides: {
+                    "symbolWatermarkProperties.color": "#ffffff"
+                }
             });
-{#            widget.onChartReady(function () {#}
-{#                widget.chart().createStudy('Correlation', false, true);#}
-{#                widget.chart().createStudy('Spread', false, true);#}
-{#            });#}
+
         });
 
     </script>

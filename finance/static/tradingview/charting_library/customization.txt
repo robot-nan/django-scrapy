@@ -54,7 +54,7 @@
 	mainSeriesProperties.priceAxisProperties.log:false
 	mainSeriesProperties.priceAxisProperties.logDisabled:false
 
-	symbolWatermarkProperties.color : "#555"
+	symbolWatermarkProperties.color : "#ffffff"
 
 	//	Percent
 	symbolWatermarkProperties.transparency: 85
