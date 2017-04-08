@@ -1,7 +1,7 @@
 # coding: utf-8
 
 import random
-import tushare as ts
+# import tushare as ts
 import traceback
 import requests
 import json
@@ -104,15 +104,15 @@ def get_finance_brief():
             except:
                 print traceback.format_exc()
 
-
-def get_stack_code():
-    res = ts.get_stock_basics()
-    codes = res['name'].to_dict().keys()
-    StackSettings.objects(name='stack_list').update_one(
-        updatetime=timezone.now(),
-        list_data=codes,
-        upsert=True
-    )
+#
+# def get_stack_code():
+#     res = ts.get_stock_basics()
+#     codes = res['name'].to_dict().keys()
+#     StackSettings.objects(name='stack_list').update_one(
+#         updatetime=timezone.now(),
+#         list_data=codes,
+#         upsert=True
+#     )
 
 
 def get_k_datas():
