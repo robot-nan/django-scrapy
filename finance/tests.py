@@ -133,9 +133,7 @@
 #
 # if __name__ == '__main__':
 #     f = Finance()
-#     """
 #
-#     """
 #     res = f.item_K(13, '111081', d_type=9)
 #     for i in xrange(20):
 #         _datetime = datetime.datetime.now()

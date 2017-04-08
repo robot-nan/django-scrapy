@@ -9,6 +9,7 @@ import tushare as ts
 from collections import OrderedDict
 from django.http import JsonResponse
 from bs4 import BeautifulSoup
+from django.shortcuts import render
 from django.utils import timezone
 from lxml import etree
 from user_agents import USER_AGENTS
@@ -69,7 +70,7 @@ def get_kxt(request, date=None):
     return JsonResponse({'data': item, 'now_time': timezone.now()})
 
 
-def get_investing(request,code):
+def get_investing(request, code):
     res = FinanceInfo.objects.filter(code=code).first().data
     return JsonResponse(res)
 
@@ -134,7 +135,7 @@ def stock_finance_sina(request, code):
 def caiku(request, code):
     url = 'http://www.caiku.com/stock/' + code + '/pick.html'
     headers = {
-        "User-Agent":random.choice(USER_AGENTS)
+        "User-Agent": random.choice(USER_AGENTS)
     }
     res = requests.get(url, headers=headers)
 
@@ -237,4 +238,13 @@ def stock_today_ditail(request, code):
     context['time'] = df.iloc[0]['amount']
     context['date'] = df.iloc[0]['amount']
     return JsonResponse(context)
+
+
+def piano(request):
+    context={}
+    values = ['bEm', '#G', 'bBm', '#FM', 'Dm', '#Gm', 'Bm', 'Fm', 'A', 'C', 'B', 'E', 'D', 'G', 'F', '#Cm', 'GM', 'fm', 'Em', 'bE', '#Fm', 'Cm', 'bB', '#C', 'Am', '#F', '#CM', 'Gm']
+    random.shuffle(values)
+    context['data_list'] = values
+    return render(request, 'piano.html', context)
+
 

@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta name="keywords" content="九星金服">
+    <title>随机和弦</title>
+    <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/piano.css' %}">
+</head>
+
+<body style="background-image:url('{% static "img/bg.jpg" %}')">
+<table>
+    <div class="row">
+        <div class="col-xd-2">a</div>
+        <div class="col-xd-2">a</div>
+        <div class="col-xd-2">a</div>
+        <div class="col-xd-2">a</div>
+        <div class="col-xd-2">a</div>
+        <div class="col-xd-2">a</div>
+    </div>
+</table>
+</body>
+</html>
+
+<script>
+    $(function () {
+        var datas = {{ data_list }};
+        $('#start').click(function () {
+
+        })
+
+
+    })
+</script>

@@ -136,3 +136,43 @@ def get_k_datas():
             else:
                 print timezone.now(), '===', _code, '===', _time, '===', res, '\n'
 
+
+def finanace_base_info():
+    '''
+    https://apimarkets.wallstreetcn.com/v1/quote/XAUUSD
+    XAUUSD 黄金
+    XAGUSD 白银
+    USOil 原油
+    Copper 铜
+    AUTD 黄金TD
+    AGTD 白银TD
+    :return: 
+    '''
+    finance_list = {
+        "XAUUSD": u'黄金',
+        "XAGUSD": u'白银',
+        "USOil": u'原油',
+        "Copper": u'铜',
+        "AUTD": u'黄金T+D',
+        "AGTD": u'白银',
+    }
+    price_base_url = 'https://apimarkets.wallstreetcn.com/v1/price'
+    info_base_url = r'https://apimarkets.wallstreetcn.com/v1/quote/'
+
+    for _code, _name in finance_list.iteritems():
+        datas = {}
+        params = {
+            "symbol": _name
+        }
+        res = requests.get(price_base_url, params=params)
+        data = res.json()['results'][0]
+        datas['price'] = data['price']
+        datas['change'] = data['change']
+        datas['changePercent'] = data['changePercent']
+        url = info_base_url + _code
+        res = requests.get(url)
+        data = res.json()['results']
+        datas['open'] = data['open']
+        datas['close'] = data['prevClose']
+        datas = dict((("set__data__%s" % k, v) for k, v in datas.iteritems()))
+        FinanceInfo.objects(name=_name, code=_code).update(**datas)
