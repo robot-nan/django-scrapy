@@ -145,11 +145,12 @@ def tradingview_config(request):
 
 @xframe_options_exempt
 def symbol_info(request):
-    print request.GET
+
     symbol = request.GET.get('symbol')
     q = {
         '111081': [u'现货黄金','111081'],
-        '111082': [u'现货白银','111082']
+        '111082': [u'现货白银','111082'],
+        '119400': [u'原油','119400']
     }
     q = {"description": q[symbol][0],
          "has_no_volume": True,
@@ -183,5 +184,5 @@ def markets(request):
         "W": 5,
         "M": 6
     }
-    datas = FuturesK.objects.filter(market=13, code=symbol, type=resolution[num]).first()
+    datas = FuturesK.objects.filter(code=symbol, type=resolution[num]).first()
     return JsonResponse(datas.list_data)
