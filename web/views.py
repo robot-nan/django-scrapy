@@ -248,3 +248,6 @@ def piano(request):
     return render(request, 'piano.html', context)
 
 
+
+def wallstreetcn(request,code):
+    return JsonResponse(FinanceInfo.objects(code=code).first().data)

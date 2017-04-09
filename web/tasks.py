@@ -138,16 +138,14 @@ def get_k_datas():
                 print timezone.now(), '===', _code, '===', _time, '===', res, '\n'
 
 
-def finance_base_info():
+def wallstreetcn_finance_info():
     '''
-    https://apimarkets.wallstreetcn.com/v1/quote/XAUUSD
     XAUUSD 黄金
     XAGUSD 白银
     USOil 原油
     Copper 铜
     AUTD 黄金TD
     AGTD 白银TD
-    :return: 
     '''
     finance_list = {
         "XAUUSD": u'黄金',
