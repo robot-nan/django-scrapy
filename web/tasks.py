@@ -104,6 +104,7 @@ def get_finance_brief():
             except:
                 print traceback.format_exc()
 
+
 #
 # def get_stack_code():
 #     res = ts.get_stock_basics()
@@ -156,6 +157,7 @@ def finanace_base_info():
         "AUTD": u'黄金T+D',
         "AGTD": u'白银',
     }
+
     price_base_url = 'https://apimarkets.wallstreetcn.com/v1/price'
     info_base_url = r'https://apimarkets.wallstreetcn.com/v1/quote/'
 
@@ -174,6 +176,8 @@ def finanace_base_info():
         data = res.json()['results']
         datas['open'] = data['open']
         datas['close'] = data['prevClose']
-        datas['upsert'] = True
-        datas = dict((("set__data__%s" % k, v) for k, v in datas.iteritems()))
-        print FinanceInfo.objects(name=_name, code=_code).update_one(**datas)
+        FinanceInfo.objects(name=_name, code=_code).update_one(
+            updatetime=timezone.now(),
+            data=datas,
+            upsert=True
+        )
