@@ -3,11 +3,13 @@
 # from mongoengine import *
 # import time
 # import datetime
-# # import TradeX
+# import TradeX
 #
 # MARKETS = [
-#     {13: '111081'},
-#     {13: '111082'},
+#     # {13: '111081'},
+#     # {13: '111082'},
+#     # {15: '119400'},
+#     {17: '119400'},
 # ]
 # TIME_FORMAT = {
 #     0: '%Y-%m-%d %H:%M',
@@ -91,6 +93,7 @@
 #         """
 #         while 1:
 #             res = self.conn.GetInstrumentBars(d_type, market, item_name, start, count)
+#
 #             if '10038' in res[0]:
 #                 self.reload_server()
 #             else:
@@ -119,7 +122,10 @@
 #
 #         for _line_value in values:
 #             _line_data = _line_value.split('\t')
+#
 #             _timestamp = int(time.mktime(time.strptime(_line_data[0], time_format)))
+#             # if '-00-00 00:00' in e.message:
+#             #     _timestamp = int(time.mktime(time.strptime(_line_data[0].split('-')[0], '%Y')))
 #             context['t'].append(_timestamp)
 #             context['c'].append(float(_line_data[4]))
 #             context['o'].append(float(_line_data[1]))
@@ -138,22 +144,20 @@
 #     for i in xrange(20):
 #         _datetime = datetime.datetime.now()
 #         print _datetime.strftime('%Y-%m-%d %H:%M:%S')
-#         try:
-#             for market in MARKETS:
-#                 for _market, name in market.iteritems():
-#                     # res = f.time_sharing(_market, name)
-#                     # FuturesTimeSharing.objects(market=_market, code=name).update_one(
-#                     #     list_data=res,
-#                     #     update_time=_datetime,
-#                     #     upsert=True
-#                     # )
-#                     for _index in xrange(12):
-#                         res = f.item_K(_market, name, d_type=_index)
-#                         if res['t']:
-#                             FuturesK.objects(market=_market, code=name, type=_index).update_one(
-#                                 list_data=res,
-#                                 update_time=_datetime,
-#                                 upsert=True
-#                             )
-#         except:
-#             pass
+#         for market in MARKETS:
+#             for _market, name in market.iteritems():
+#                 # res = f.time_sharing(_market, name)
+#                 # FuturesTimeSharing.objects(market=_market, code=name).update_one(
+#                 #     list_data=res,
+#                 #     update_time=_datetime,
+#                 #     upsert=True
+#                 # )
+#                 for _index in xrange(12):
+#                     res = f.item_K(_market, name, d_type=_index)
+#
+#                     if res['t']:
+#                         FuturesK.objects(market=_market, code=name, type=_index).update_one(
+#                             list_data=res,
+#                             update_time=_datetime,
+#                             upsert=True
+#                         )
