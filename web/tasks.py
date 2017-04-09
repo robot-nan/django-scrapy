@@ -96,6 +96,7 @@ def get_finance_brief():
                     FinanceInfo.objects(name=_name, code=str(finance[_name])).update_one(
                         updatetime=timezone.now(),
                         data=datas,
+                        web_site='https://hk.investing.com',
                         upsert=True
                     )
 
@@ -137,7 +138,7 @@ def get_k_datas():
                 print timezone.now(), '===', _code, '===', _time, '===', res, '\n'
 
 
-def finanace_base_info():
+def finance_base_info():
     '''
     https://apimarkets.wallstreetcn.com/v1/quote/XAUUSD
     XAUUSD 黄金
@@ -156,20 +157,20 @@ def finanace_base_info():
         "AUTD": u'黄金T+D',
         "AGTD": u'白银',
     }
-
     price_base_url = 'https://apimarkets.wallstreetcn.com/v1/price'
-    info_base_url = r'https://apimarkets.wallstreetcn.com/v1/quote/'
+    info_base_url = 'https://apimarkets.wallstreetcn.com/v1/quote/'
 
     for _code, _name in finance_list.iteritems():
         datas = {}
         params = {
-            "symbol": _name
+            "symbol": _code
         }
         res = requests.get(price_base_url, params=params)
         data = res.json()['results'][0]
         datas['price'] = data['price']
         datas['change'] = data['change']
         datas['changePercent'] = data['changePercent']
+
         url = info_base_url + _code
         res = requests.get(url)
         data = res.json()['results']
@@ -178,5 +179,6 @@ def finanace_base_info():
         FinanceInfo.objects(name=_name, code=_code).update_one(
             updatetime=timezone.now(),
             data=datas,
+            web_site='https://apimarkets.wallstreetcn.com',
             upsert=True
         )
