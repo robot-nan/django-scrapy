@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import random
-# import tushare as ts
 import traceback
 import requests
 import json
@@ -162,7 +161,6 @@ def finanace_base_info():
     info_base_url = r'https://apimarkets.wallstreetcn.com/v1/quote/'
 
     for _code, _name in finance_list.iteritems():
-        print _name
         datas = {}
         params = {
             "symbol": _name
