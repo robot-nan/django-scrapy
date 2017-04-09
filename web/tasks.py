@@ -176,4 +176,4 @@ def finanace_base_info():
         datas['close'] = data['prevClose']
         datas['upsert'] = True
         datas = dict((("set__data__%s" % k, v) for k, v in datas.iteritems()))
-        print FinanceInfo.objects(name=_name, code=_code).update(**datas)
+        print FinanceInfo.objects(name=_name, code=_code).update_one(**datas)
