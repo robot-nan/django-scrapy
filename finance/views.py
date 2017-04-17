@@ -145,12 +145,11 @@ def tradingview_config(request):
 
 @xframe_options_exempt
 def symbol_info(request):
-
     symbol = request.GET.get('symbol')
     q = {
-        '111081': [u'现货黄金','111081'],
-        '111082': [u'现货白银','111082'],
-        '119400': [u'原油','119400']
+        '111081': [u'现货黄金', '111081'],
+        '111082': [u'现货白银', '111082'],
+        'USOIL': [u'美原油', 'USOIL']
     }
     q = {"description": q[symbol][0],
          "has_no_volume": True,
@@ -169,6 +168,7 @@ def symbol_info(request):
          "exchange-listed": ""}
 
     return JsonResponse(q)
+
 
 @xframe_options_exempt
 def markets(request):
