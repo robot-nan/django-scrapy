@@ -202,7 +202,7 @@ def ssajax_info():
             res = res.text.split("(")[1].strip(");")
             FinanceInfo.objects(name=_name, code=_name).update_one(
                 updatetime=timezone.now(),
-                data=res,
+                data=json.loads(res),
                 web_site='',
                 upsert=True
             )
