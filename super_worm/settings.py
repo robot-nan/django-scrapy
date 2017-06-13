@@ -170,6 +170,7 @@ CRONJOBS = [
     ('0 0 * * *', 'web.tasks.get_stack_code', '>> /var/log/super_worm/get_stack_code.log'),
     ('0 0 * * *', 'web.tasks.get_k_datas', '>> /var/log/super_worm/get_k_datas.log'),
     ('*/1 * * * *', 'web.tasks.wallstreetcn_finance_info', '>> /var/log/super_worm/wallstreetcn_finance_info.log'),
+    ('*/1 * * * *', 'web.tasks.ssajax_info', '>> /var/log/super_worm/ssajax_info.log'),
 
 ]
 

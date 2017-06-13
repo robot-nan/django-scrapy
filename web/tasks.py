@@ -2,6 +2,9 @@
 
 import random
 import traceback
+import urllib
+import urllib2
+
 import requests
 import json
 from bs4 import BeautifulSoup
@@ -180,3 +183,29 @@ def wallstreetcn_finance_info():
             web_site='https://apimarkets.wallstreetcn.com',
             upsert=True
         )
+
+
+def ssajax_info():
+    urls = {
+        'GLNQ': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=GLNQ&jys=COMEX',
+        'GLNV': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=GLNV&jys=COMEX',
+        'GLNZ': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=GLNZ&jys=COMEX',
+        'CNGN': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGN&jys=NYMEX',
+        'CNGQ': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGQ&jys=NYMEX',
+        'CNGU': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGU&jys=NYMEX',
+        'CNGV': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGV&jys=NYMEX',
+        'CNGX': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGX&jys=NYMEX',
+    }
+    for _name, _url in urls.iteritems():
+        try:
+            res = requests.get(_url)
+            res = res.text.split("(")[1].strip(");")
+            FinanceInfo.objects(name=_name, code=_name).update_one(
+                updatetime=timezone.now(),
+                data=res,
+                web_site='',
+                upsert=True
+            )
+        except:
+            print traceback.format_exc()
+            pass
