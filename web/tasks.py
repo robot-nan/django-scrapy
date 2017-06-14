@@ -7,6 +7,8 @@ import urllib2
 
 import requests
 import json
+
+import time
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from web.doc import FinanceInfo, StackSettings, StackDatas
@@ -197,16 +199,18 @@ def ssajax_info():
         'CNGX': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGX&jys=NYMEX',
         'CNGZ': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGZ&jys=NYMEX',
     }
-    for _name, _url in urls.iteritems():
-        try:
-            res = requests.get(_url)
-            res = res.text.split("(")[1].strip(");")
-            FinanceInfo.objects(name=_name, code=_name).update_one(
-                updatetime=timezone.now(),
-                data=json.loads(res),
-                web_site='',
-                upsert=True
-            )
-        except:
-            print traceback.format_exc()
-            pass
+    for _ in [20,20,20]:
+        for _name, _url in urls.iteritems():
+            try:
+                res = requests.get(_url)
+                res = res.text.split("(")[1].strip(");")
+                FinanceInfo.objects(name=_name, code=_name).update_one(
+                    updatetime=timezone.now(),
+                    data=json.loads(res),
+                    web_site='',
+                    upsert=True
+                )
+            except:
+                print traceback.format_exc()
+                pass
+        time.sleep(_)
