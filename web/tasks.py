@@ -195,6 +195,7 @@ def ssajax_info():
         'CNGU': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGU&jys=NYMEX',
         'CNGV': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGV&jys=NYMEX',
         'CNGX': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGX&jys=NYMEX',
+        'CNGZ': 'http://q.ssajax.cn/webhandler/futures.ashx?fn=jQuery16108377160098442307_1497358977218&code=CNGZ&jys=NYMEX',
     }
     for _name, _url in urls.iteritems():
         try:
